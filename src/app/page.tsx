@@ -1,17 +1,18 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import Hero from "@/components/sections/Hero";
-import About from "@/components/sections/About";
-import Experience from "@/components/sections/Experience";
-import Projects from "@/components/sections/Projects";
-import Skills from "@/components/sections/Skills";
-import Contact from "@/components/sections/Contact";
+import Navbar from "@/components/layout/Navbar/Navbar";
+import Footer from "@/components/layout/Footer/Footer";
+import Hero from "@/components/sections/Hero/Hero";
+import About from "@/components/sections/About/About";
+import Experience from "@/components/sections/Experience/Experience";
+import Projects from "@/components/sections/Projects/Projects";
+import Skills from "@/components/sections/Skills/Skills";
+import Contact from "@/components/sections/Contact/Contact";
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className="relative">
+    <div className={styles.page}>
       <Navbar />
-      <main>
+      <main className={styles.main}>
         <Hero />
         <About />
         <Experience />

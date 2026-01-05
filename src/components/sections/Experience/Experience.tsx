@@ -8,7 +8,7 @@ import { experiences } from "@/data/experience";
 export default function Experience() {
   return (
     <section id="experience" className="py-24 bg-gradient-to-b from-transparent to-[#16161d]/30">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="page-container">
         <SectionHeading>Experience</SectionHeading>
 
         <div className="space-y-8">

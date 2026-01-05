@@ -7,7 +7,7 @@ import SocialLinks from "@/components/ui/SocialLinks";
 export default function Contact() {
   return (
     <section id="contact" className="py-24">
-      <div className="max-w-4xl mx-auto px-6 text-center">
+      <div className="page-container text-center">
         <SectionHeading>Let&apos;s Work Together</SectionHeading>
 
         <motion.p

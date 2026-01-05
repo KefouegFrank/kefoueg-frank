@@ -14,7 +14,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="py-24 bg-gradient-to-b from-transparent to-[#16161d]/30">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="page-container">
         <SectionHeading>Tech Stack</SectionHeading>
 
         <div className="grid md:grid-cols-2 gap-8">

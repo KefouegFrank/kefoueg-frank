@@ -1,0 +1,73 @@
+.experience {
+  padding: 6rem 0;
+  background: linear-gradient(to bottom, transparent, rgba(22, 22, 29, 0.3));
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.company {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.role {
+  color: var(--accent-cyan);
+  font-size: 1.125rem;
+}
+
+.period {
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.5rem;
+}
+
+.highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.highlight {
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.bullet {
+  color: var(--accent-cyan);
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    align-items: start;
+  }
+
+  .period {
+    margin-top: 0;
+  }
+}

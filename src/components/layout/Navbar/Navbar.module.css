@@ -14,9 +14,9 @@
 }
 
 .navContainer {
-  max-width: 1280px;
+  max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 1.25rem 1.5rem;
+  padding: 1.25rem var(--page-padding);
 }
 
 .navContent {

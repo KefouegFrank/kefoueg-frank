@@ -9,7 +9,7 @@ import { projects } from "@/data/projects";
 export default function Projects() {
   return (
     <section id="projects" className="py-24">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="page-container">
         <SectionHeading>Featured Projects</SectionHeading>
 
         <div className="grid md:grid-cols-2 gap-8">

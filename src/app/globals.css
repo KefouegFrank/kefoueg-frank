@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --background: #0a0a0f;
   --surface: #16161d;
@@ -5,6 +7,12 @@
   --accent-purple: #8b5cf6;
   --text-primary: #e4e4e7;
   --text-secondary: #71717a;
+
+  /* Page layout constraints */
+  --page-max-width: 1100px;
+  --page-max-width-wide: 1280px;
+  --page-padding: 1.5rem;
+  --section-padding-y: 6rem;
 }
 
 * {
@@ -44,13 +52,22 @@ body {
   background: var(--accent-purple);
 }
 
-/* Utility classes */
-.container {
-  max-width: 1280px;
+/* Global utility classes that sections can use */
+.page-container {
+  max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 var(--page-padding);
+  width: 100%;
 }
 
+.page-container-wide {
+  max-width: var(--page-max-width-wide);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+  width: 100%;
+}
+
+/* Utility classes */
 .gradient-text {
   background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
   -webkit-background-clip: text;
@@ -60,4 +77,17 @@ body {
 
 .gradient-bg {
   background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+}
+
+/* Responsive padding adjustments */
+@media (min-width: 640px) {
+  :root {
+    --page-padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --page-padding: 3rem;
+  }
 }
