@@ -1,0 +1,241 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #0a0a0f, #1a1a2e, #0a0a0f);
+}
+
+.orbCyan {
+  position: absolute;
+  top: 0;
+  right: 25%;
+  width: 600px;
+  height: 600px;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: 50%;
+  filter: blur(150px);
+}
+
+.orbPurple {
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 500px;
+  height: 500px;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 50%;
+  filter: blur(150px);
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  gap: 4rem;
+  align-items: center;
+}
+
+.leftContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.badge {
+  display: inline-block;
+  width: fit-content;
+}
+
+.badge span {
+  display: block;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 9999px;
+  color: var(--accent-cyan);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.greeting {
+  color: var(--accent-cyan);
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+
+.name {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.nameWhite {
+  color: white;
+}
+
+.nameGray {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: var(--accent-cyan);
+  margin-bottom: 1.5rem;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  max-width: 40rem;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.btnPrimary {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.btnPrimary:hover {
+  opacity: 0.9;
+}
+
+.btnSecondary {
+  padding: 0.75rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.btnSecondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.socialLinks {
+  padding-top: 1.5rem;
+}
+
+.rightContent {
+  position: relative;
+  height: 500px;
+}
+
+.glowEffect {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(139, 92, 246, 0.2));
+  border-radius: 1.5rem;
+  filter: blur(3rem);
+}
+
+.canvasContainer {
+  position: relative;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.5), transparent);
+  backdrop-filter: blur(4px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.dragHint {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+}
+
+.dragHint svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scrollText {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.scrollArrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: rgba(255, 255, 255, 0.4);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.5rem);
+  }
+}
+
+/* Responsive */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .name {
+    font-size: 4.5rem;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+
+  .rightContent {
+    height: 600px;
+  }
+}
