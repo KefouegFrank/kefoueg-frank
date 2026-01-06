@@ -1,57 +1,24 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --color-background: #0a0a0f;
-  --color-surface: #16161d;
-  --color-accent-cyan: #00d4ff;
-  --color-accent-purple: #8b5cf6;
-  --color-text-primary: #e4e4e7;
-  --color-text-secondary: #71717a;
-
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
-@layer base {
+@media (prefers-color-scheme: dark) {
   :root {
-    color-scheme: dark;
-  }
-
-  body {
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: 700;
-    letter-spacing: -0.025em;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
 }
 
-@layer utilities {
-  .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .text-gradient {
-    background: linear-gradient(to right, var(--color-accent-cyan), var(--color-accent-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .bg-gradient-accent {
-    background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
-  }
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
