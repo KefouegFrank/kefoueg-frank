@@ -109,7 +109,7 @@ export default function Loader({ onComplete }: LoaderProps) {
           {/* Large Centered Percentage */}
           <div className="flex items-start mb-8">
             <span 
-              className="text-[80px] md:text-[144px] leading-[80px] md:leading-[144px] italic tracking-tighter transition-all duration-75 text-white"
+              className="text-[100px] md:text-[144px] leading-[80px] md:leading-[144px] italic tracking-tighter transition-all duration-75 text-white"
               style={{ 
                 fontFamily: "var(--font-syne)",
                 fontWeight: 800,
@@ -176,7 +176,7 @@ export default function Loader({ onComplete }: LoaderProps) {
       </div>
 
       {/* Bottom Loading Indicator - Aligned with bottom brackets, more spacing */}
-      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-3 text-[10px] tracking-[0.4em] text-white/20 font-mono uppercase">
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-3 text-[10px] tracking-[0.4em] text-white/20 font-mono uppercase whitespace-nowrap">
         <div className={`w-2 h-2 rounded-full bg-hud-cyan shadow-[0_0_5px_var(--hud-cyan)] ${progress === 100 ? 'animate-ping' : 'animate-pulse'}`} />
         {progress === 100 ? "LAUNCHING INTERFACE..." : "LOADING PORTFOLIO"}
       </div>

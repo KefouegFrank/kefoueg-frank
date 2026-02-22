@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Loader from "@/components/Loader";
-// import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -36,7 +36,12 @@ export default function RootLayout({
       >
         {/* {children} */}
          {loading && <Loader onComplete={() => setLoading(false)} />}
-        {!loading && children}
+        {!loading && (
+          <>
+            <Navbar />
+            {children}
+          </>
+        )}
       </body>
     </html>
   );
