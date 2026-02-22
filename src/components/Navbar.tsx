@@ -76,7 +76,7 @@ const Navbar = () => {
           <div className="relative">
             <button 
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className="group flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors font-mono"
+              className="group flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors font-mono"
             >
               <div className="relative w-4 h-4">
                 <svg viewBox="0 0 24 24" className="w-full h-full fill-none stroke-current stroke-1.5 opacity-60 group-hover:opacity-100 transition-opacity">
