@@ -71,10 +71,10 @@ export default function Loader({ onComplete }: LoaderProps) {
         />
 
         {/* Corner Brackets */}
-        <div className="absolute top-8 left-8 w-12 h-12 border-t-[3px] border-l-[3px] border-cyan-500/30" />
-        <div className="absolute top-8 right-8 w-12 h-12 border-t-[3px] border-r-[3px] border-cyan-500/30" />
-        <div className="absolute bottom-8 left-8 w-12 h-12 border-b-[3px] border-l-[3px] border-cyan-500/30" />
-        <div className="absolute bottom-8 right-8 w-12 h-12 border-b-[3px] border-r-[3px] border-cyan-500/30" />
+        <div className="absolute top-4 md:top-8 left-4 md:left-8 w-12 h-12 border-t-[5px] border-l-[5px] border-cyan-500/30" />
+        <div className="absolute top-4 md:top-8 right-4 md:right-8 w-12 h-12 border-t-[5px] border-r-[5px] border-cyan-500/30" />
+        <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 w-12 h-12 border-b-[5px] border-l-[5px] border-cyan-500/30" />
+        <div className="absolute bottom-4 md:bottom-8 right-4 md:right-8 w-12 h-12 border-b-[5px] border-r-[5px] border-cyan-500/30" />
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-4xl px-6 h-full">
@@ -85,7 +85,7 @@ export default function Loader({ onComplete }: LoaderProps) {
               className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none select-none text-transparent stroke-white"
               style={{ 
                 WebkitTextStroke: '1px rgba(255,255,255,0.1)',
-                fontFamily: "'Orbitron', sans-serif",
+                fontFamily: "var(--font-orbitron)",
                 letterSpacing: '-0.02em'
               }}
             >
@@ -96,9 +96,9 @@ export default function Loader({ onComplete }: LoaderProps) {
               className="absolute top-0 left-0 w-full text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none select-none overflow-hidden transition-all duration-300 ease-out"
               style={{ 
                 clipPath: `inset(0 ${100 - progress}% 0 0)`,
-                color: '#00ffff',
-                textShadow: '0 0 20px rgba(0,255,255,0.5)',
-                fontFamily: "'Orbitron', sans-serif",
+                color: 'var(--hud-cyan)',
+                textShadow: '0 0 20px var(--hud-cyan-glow)',
+                fontFamily: "var(--font-orbitron)",
                 letterSpacing: '-0.02em'
               }}
             >
@@ -109,12 +109,10 @@ export default function Loader({ onComplete }: LoaderProps) {
           {/* Large Centered Percentage */}
           <div className="flex items-start mb-8">
             <span 
-              className="italic tracking-tighter transition-all duration-75 text-white"
+              className="text-[80px] md:text-[144px] leading-[80px] md:leading-[144px] italic tracking-tighter transition-all duration-75 text-white"
               style={{ 
-                fontFamily: "'Syne', sans-serif",
+                fontFamily: "var(--font-syne)",
                 fontWeight: 800,
-                fontSize: '144px',
-                lineHeight: '144px',
                 fontVariantNumeric: 'tabular-nums' 
               }}
             >
@@ -154,23 +152,23 @@ export default function Loader({ onComplete }: LoaderProps) {
               
               {/* Active Progress Bar */}
               <div 
-                className="absolute top-0 left-0 h-full bg-cyan-400 transition-all duration-300 ease-out"
+                className="absolute top-0 left-0 h-full bg-hud-cyan transition-all duration-300 ease-out"
                 style={{ width: `${progress}%` }}
               />
               
               {/* Pulsing Bead */}
               <div 
-                className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#00ffff]"
+                className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_10px_var(--hud-cyan)]"
                 style={{ left: `calc(${progress}% - 4px)` }}
               />
             </div>
 
             {/* Status Line */}
             <div className="flex justify-between items-center text-[10px] md:text-xs uppercase">
-              <span className="text-cyan-400/80 font-mono">{getStatus(progress)}</span>
+              <span className="text-hud-cyan/80 font-mono">{getStatus(progress)}</span>
               <span 
                 className="text-white/40 tracking-tighter"
-                style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700 }}
+                style={{ fontFamily: "var(--font-syne)", fontWeight: 700 }}
               >{currentStep} / 8</span>
             </div>
           </div>
@@ -179,7 +177,7 @@ export default function Loader({ onComplete }: LoaderProps) {
 
       {/* Bottom Loading Indicator - Aligned with bottom brackets, more spacing */}
       <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-3 text-[10px] tracking-[0.4em] text-white/20 font-mono uppercase">
-        <div className={`w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_5px_#00ffff] ${progress === 100 ? 'animate-ping' : 'animate-pulse'}`} />
+        <div className={`w-2 h-2 rounded-full bg-hud-cyan shadow-[0_0_5px_var(--hud-cyan)] ${progress === 100 ? 'animate-ping' : 'animate-pulse'}`} />
         {progress === 100 ? "LAUNCHING INTERFACE..." : "LOADING PORTFOLIO"}
       </div>
     </div>
