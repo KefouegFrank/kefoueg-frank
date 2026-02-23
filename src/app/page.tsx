@@ -1,11 +1,13 @@
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Experience from "@/components/Experience";
 
 export default function Home() {
   return (
-    <main className="relative bg-black min-h-screen overflow-hidden text-white">
+    <main className="min-h-screen bg-black">
       <Hero />
       <About />
+      <Experience />
     </main>
   );
 }
