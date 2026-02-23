@@ -81,7 +81,7 @@ const TechStack = () => {
           <div className="relative flex flex-col items-center md:items-end text-center md:text-right pt-28">
             {/* Background Index Number - Repositioned Right with Top Spacing */}
             <div
-              className="absolute -top-5 right-0 md:right-60 lg:right-110 text-[10rem] md:text-[14rem] lg:text-[18rem] font-black text-white/[0.04] leading-none pointer-events-none select-none transition-all duration-700"
+              className="absolute -top-5 lg:-top-20 right-0 md:right-60 lg:right-150 text-[10rem] md:text-[14rem] lg:text-[18rem] font-black text-white/[0.04] leading-none pointer-events-none select-none transition-all duration-700"
               style={{ fontFamily: "var(--font-syne)" }}
             >
               {currentCategory.id}
@@ -95,7 +95,7 @@ const TechStack = () => {
                 {currentCategory.title}
               </h2>
               <div className="flex justify-center md:justify-end">
-                <p className="text-white/40 font-mono text-[10px] md:text-sm tracking-[0.3em] uppercase">
+                <p className="text-white/40 font-mono text-[10px] md:text-sm tracking-[0.3em] uppercase text-right mt-4">
                   {currentCategory.subtitle}
                 </p>
               </div>
@@ -103,7 +103,7 @@ const TechStack = () => {
           </div>
 
           {/* Tech Grid - Vertical Cards */}
-          <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 mt-16">
+          <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 mt-12">
             {currentCategory.techs.map((tech, index) => (
               <div
                 key={index}
@@ -127,7 +127,7 @@ const TechStack = () => {
           </div>
 
           {/* Bottom Interactive Area */}
-          <div className="relative z-10 flex flex-row items-center justify-between mt-1 pt-8 gap-4">
+          <div className="relative z-10 flex flex-row items-center justify-between mt-6 pt-8 gap-4">
             <button
               onClick={nextCategory}
               className="group relative flex items-center gap-4 px-3 py-2 rounded-full border border-hud-cyan/20 bg-hud-cyan/5 transition-all active:scale-95 hover:border-hud-cyan/60 hover:shadow-[0_0_20px_rgba(0,255,255,0.15)]"
