@@ -81,13 +81,13 @@ const TechStack = () => {
           <div className="relative flex flex-col items-center md:items-end text-center md:text-right pt-28">
             {/* Background Index Number - Repositioned Right with Top Spacing */}
             <div
-              className="absolute -top-20 right-0 md:right-110 text-[10rem] md:text-[18rem] font-black text-white/[0.03] leading-none pointer-events-none select-none transition-all duration-700"
+              className="absolute -top-20 right-0 md:right-110 text-[10rem] md:text-[18rem] font-black text-white/[0.04] leading-none pointer-events-none select-none transition-all duration-700"
               style={{ fontFamily: "var(--font-syne)" }}
             >
               {currentCategory.id}
             </div>
 
-            <div className="relative z-10 space-y-2">
+            <div className="relative z-10">
               <h2
                 className="text-6xl md:text-8xl font-black text-white tracking-tighter uppercase italic leading-none"
                 style={{ fontFamily: "var(--font-syne)" }}
@@ -109,17 +109,15 @@ const TechStack = () => {
                 key={index}
                 className="group relative flex flex-col items-center gap-4 p-6 rounded-2xl border border-white/5 bg-white/[0.03] transition-all duration-500 hover:bg-hud-cyan/[0.05]"
               >
-                {/* Reference Indicator Dot */}
-                <div className="absolute top-3 right-3 w-1 h-1 rounded-full bg-hud-cyan/20 group-hover:bg-hud-cyan transition-colors" />
 
-                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/5 group-hover:bg-hud-cyan/10 group-hover:scale-110 transition-all shadow-2xl overflow-hidden p-2">
+                <div className="flex items-center justify-center w-12 h-12 rounded-xl group-hover:bg-hud-cyan/10 group-hover:scale-110 transition-all shadow-2xl overflow-hidden p-2">
                   <NextImage
                     src={tech.icon}
                     alt={tech.name}
                     width={40}
                     height={40}
                     unoptimized={tech.icon.endsWith(".svg")}
-                    className="w-full h-full object-contain filter group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.4)] transition-all"
+                    // className="w-full h-full object-contain filter group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.4)] transition-all"
                   />
                 </div>
                 <span className="text-white/40 font-mono text-[9px] md:text-[10px] uppercase tracking-widest text-center group-hover:text-white transition-colors">
@@ -130,12 +128,12 @@ const TechStack = () => {
           </div>
 
           {/* Bottom Interactive Area */}
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between border-t border-white/5 mt-16 pt-8 gap-6 md:gap-0">
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between  mt-1 pt-8 gap-6 md:gap-0">
             <button
               onClick={nextCategory}
-              className="group relative flex items-center gap-4 px-8 py-3 rounded-full border border-hud-cyan/20 bg-hud-cyan/5 transition-all active:scale-95 hover:border-hud-cyan/60 hover:shadow-[0_0_20px_rgba(0,255,255,0.15)]"
+              className="group relative flex items-center gap-4 px-8 py-2 rounded-full border border-hud-cyan/20 bg-hud-cyan/5 transition-all active:scale-95 hover:border-hud-cyan/60 hover:shadow-[0_0_20px_rgba(0,255,255,0.15)]"
             >
-              <div className="relative flex items-center justify-center w-6 h-6 rounded-full bg-hud-cyan/20 group-hover:bg-hud-cyan transition-colors">
+              <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-hud-cyan/20 group-hover:bg-hud-cyan transition-colors">
                 <IconSwitch />
               </div>
               <span className="text-white/80 font-mono text-[10px] uppercase tracking-widest font-bold">
@@ -143,7 +141,7 @@ const TechStack = () => {
               </span>
             </button>
 
-            <div className="flex items-center gap-6 bg-white/5 px-6 py-2 rounded-full border border-white/10 font-mono">
+            <div className="flex items-center gap-1 bg-white/5 px-6 py-2 rounded-full border border-white/10 font-mono">
               <span className="text-hud-cyan text-sm font-bold tracking-widest">
                 {currentCategory.id}
               </span>
