@@ -242,30 +242,32 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-24 px-6 bg-black relative overflow-hidden border-t border-white/5"
+      className="py-24 px-2 md:px-8 bg-black relative overflow-hidden border-t border-white/5 -mt-25"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-20">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-20">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-4">
-              <div className="h-[1px] w-8 bg-hud-cyan/40" />
-              <span className="text-hud-cyan font-mono text-xs tracking-[0.3em] uppercase">
+              <div className="h-[2px] w-8 bg-hud-cyan/60" />
+              <span className="text-hud-cyan font-mono text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] uppercase">
                 [ Selected Works ]
               </span>
             </div>
             <h2
-              className="text-5xl md:text-5xl font-black text-white tracking-tighter uppercase italic leading-none"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase italic leading-none"
               style={{ fontFamily: "var(--font-syne)" }}
             >
               My
-              <span className="text-hud-cyan/90 ml-8">projects.</span>
+              <span className="text-hud-cyan/90 block sm:inline sm:ml-4 md:ml-8 mt-2 sm:mt-0">
+                projects.
+              </span>
             </h2>
           </div>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10 -mt-10">
           {projects.map((project) => (
             <div key={project.id}>
               <ProjectCard project={project} />

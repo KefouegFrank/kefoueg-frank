@@ -54,7 +54,7 @@ const Experience = () => {
   return (
     <section
       id="experience"
-      className="py-20 px-6 bg-black relative overflow-hidden border-t border-white/5"
+      className="py-20 px-2 md:px-8 bg-black relative overflow-hidden border-t border-white/5"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Top Grid: Timeline & Soft Skills */}

@@ -65,11 +65,11 @@ const TechStack = () => {
   return (
     <section
       id="skills"
-      className="py-24 px-6 bg-black relative overflow-hidden border-t border-white/5"
+      className="py-24 px-2 md:px-8 bg-black relative overflow-hidden border-t border-white/5 -mt-30"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Main Card Container */}
-        <div className="relative p-8 md:p-16 rounded-[2rem] border border-white/10 bg-white/[0.02] backdrop-blur-3xl overflow-hidden min-h-[600px] flex flex-col justify-between">
+        <div className="relative p-8 md:p-16 px-4 rounded-[2rem] border border-white/10 bg-white/[0.02] backdrop-blur-3xl overflow-hidden min-h-[600px] flex flex-col justify-between">
           {/* Section Label - Moved Top Left & Rebranded */}
           <div className="absolute top-8 left-8 flex items-center gap-4 z-20">
             <div className="h-[1px] w-6 bg-hud-cyan/40" />
