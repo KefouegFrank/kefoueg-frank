@@ -115,21 +115,8 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative py-32 px-2 md:px-8 bg-[#010308] min-h-screen flex items-center overflow-hidden border-t border-white/5"
+      className="relative py-32 px-2 md:px-8 bg-transparent min-h-screen flex items-center overflow-hidden border-t border-white/5"
     >
-      {/* Background Abstract "Blob" and Grid Elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Glowing Center Blob */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] aspect-square bg-hud-cyan/20 blur-[150px] rounded-full mix-blend-screen opacity-50" />
-
-        {/* Orbital Rings */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border border-hud-cyan/10 rounded-full animate-[spin_60s_linear_infinite]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] border border-hud-cyan/[0.05] rounded-full animate-[spin_90s_linear_infinite_reverse] border-dashed" />
-
-        {/* Random Particles Layer */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
-      </div>
-
       <div className="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-stretch">
         {/* Left Column: Huge Typography & Direct Contact */}
         <div className="flex flex-col justify-betwee h-full gap-8">

@@ -57,6 +57,23 @@ const Experience = () => {
       id="experience"
       className="py-20 px-2 md:px-8 bg-black relative overflow-hidden border-t border-white/5"
     >
+      {/* HUD Background - Schematic Grid & Data Streams */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.6) 1px, transparent 1px)`,
+            backgroundSize: "100px 100px",
+          }}
+        />
+        {/* Vertical Data Stream Lines */}
+        <div className="absolute inset-0 flex justify-around opacity-[0.08]">
+          <div className="w-[1px] h-full bg-hud-cyan shadow-[0_0_20px_var(--hud-cyan)]" />
+          <div className="w-[1px] h-full bg-hud-cyan shadow-[0_0_20px_var(--hud-cyan)] hidden md:block" />
+          <div className="w-[1px] h-full bg-hud-cyan shadow-[0_0_20px_var(--hud-cyan)]" />
+        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(0,255,255,0.08)_0%,transparent_70%)]" />
+      </div>
       <div className="max-w-7xl mx-auto w-full">
         {/* Top Grid: Timeline & Soft Skills */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-20">

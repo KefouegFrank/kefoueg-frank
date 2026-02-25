@@ -567,6 +567,17 @@ const Projects = () => {
       id="projects"
       className="py-24 px-2 md:px-8 bg-black relative overflow-hidden border-t border-white/5"
     >
+      {/* HUD Background - Blueprint Grid */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.8) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,255,0.1)_0%,transparent_70%)]" />
+      </div>
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
         <Reveal delay={0.1}>

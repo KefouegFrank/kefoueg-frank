@@ -65,8 +65,8 @@ export default function Loader({ onComplete }: LoaderProps) {
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.5) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
+            backgroundImage: `linear-gradient(rgba(0,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.8) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
           }}
         />
 
