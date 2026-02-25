@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import NextImage from "next/image";
+import NeuralCore from "./canvas/NeuralCore";
 
 const stacks = [
   "Fullstack Software Engineer",
@@ -96,7 +99,6 @@ const Hero = () => {
           <div className="flex flex-row gap-3 md:gap-6 mt-2">
             {/* Hire Me - Glass Pill with Circular Gradient Fill */}
             <button className="group relative h-12 md:h-14 w-32 md:w-44 rounded-full border border-hud-cyan/30 bg-hud-cyan/5 backdrop-blur-md transition-all duration-300 overflow-hidden active:scale-95">
-              {/* Circular Expansion Background */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-gradient-to-br from-hud-cyan via-hud-cyan/90 to-hud-cyan/70 scale-0 group-hover:scale-[3] transition-transform duration-1000 ease-in-out pointer-events-none" />
 
               <span className="relative z-10 text-white group-hover:text-black font-black uppercase tracking-widest text-[10px] md:text-xs transition-colors duration-700 px-2 text-center block">
@@ -106,7 +108,6 @@ const Hero = () => {
 
             {/* View Projects - Glass Pill with Circular White Fill */}
             <button className="group relative h-12 md:h-14 w-36 md:w-52 rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 overflow-hidden active:scale-95">
-              {/* Circular Expansion Background */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-white scale-0 group-hover:scale-[3] transition-transform duration-1000 ease-in-out pointer-events-none" />
 
               <span className="relative z-10 text-white/70 group-hover:text-black font-bold uppercase tracking-widest text-[10px] md:text-xs transition-colors duration-700 px-2 text-center block">
@@ -136,7 +137,6 @@ const Hero = () => {
                 href="#"
                 className="group relative w-11 h-10 transition-all active:scale-90"
               >
-                {/* 3D Base/Shadow - Hexagonal */}
                 <div
                   className="absolute inset-x-0 -bottom-1 h-full bg-hud-cyan/20 blur-[2px]"
                   style={{
@@ -144,8 +144,6 @@ const Hero = () => {
                       "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
                   }}
                 />
-
-                {/* 3D Content Layer - Hexagonal */}
                 <div
                   className="absolute inset-0 flex items-center justify-center bg-white/5 border border-white/10 text-white/40 backdrop-blur-sm transition-all group-hover:-translate-y-1.5 group-active:translate-y-0 group-hover:text-hud-cyan group-hover:bg-hud-cyan/10"
                   style={{
@@ -153,7 +151,6 @@ const Hero = () => {
                       "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
                   }}
                 >
-                  {/* Subtle Border simulation for Clip-path (using inner shadow or stroke) */}
                   <div
                     className="absolute inset-[1px] bg-black/40 -z-10"
                     style={{
@@ -174,39 +171,49 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Right Container - Placeholder */}
+        {/* Right Container - Animated Static Image & Neural Core Background */}
         <div className="w-full relative hidden lg:flex flex-col items-center justify-center min-h-[400px]">
-          {/* Simple HUD decorative element to fill space for now */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-            <svg
-              viewBox="0 0 200 200"
-              className="w-full h-full stroke-hud-cyan fill-none stroke-[0.5px]"
+          {/* Subtle Neural Core Background */}
+          <div className="absolute inset-0 opacity-40 scale-75">
+            <NeuralCore />
+          </div>
+
+          {/* Floating Hero Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative z-10 w-full h-full flex items-center justify-center"
+          >
+            <motion.div
+              animate={{
+                y: [0, -20, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="relative"
             >
-              <circle
-                cx="100"
-                cy="100"
-                r="80"
-                className="animate-spin-slow"
-                style={{ strokeDasharray: "20 10" }}
+              {/* Image Glow Effect */}
+              <div className="absolute -inset-4 bg-hud-cyan/5 blur-[60px] rounded-full animate-pulse" />
+
+              <NextImage
+                src="/programer-setup.png"
+                alt="Programmer Setup"
+                width={800}
+                height={800}
+                className="relative z-10 drop-shadow-[0_0_30px_rgba(0,255,255,0.3)] object-contain"
+                priority
               />
-              <circle
-                cx="100"
-                cy="100"
-                r="60"
-                className="animate-reverse-spin"
-                style={{ strokeDasharray: "5 5" }}
-              />
-              <path d="M100 20 L100 180 M20 100 L180 100" />
-            </svg>
-          </div>
-          <div className="relative z-10 text-hud-cyan/30 font-mono text-[10px] uppercase tracking-[0.5em] animate-pulse">
-            Terminal Interface / Pending_
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
       {/* Hero Background Elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-hud-cyan/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-10 right-0 w-1/1 h-1/3 bg-hud-cyan/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-500/5 blur-[100px] rounded-full pointer-events-none" />
     </section>
   );

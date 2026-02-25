@@ -15,10 +15,14 @@ const IconSwitch = () => (
   </svg>
 );
 
+import { motion, AnimatePresence } from "framer-motion";
+import { Reveal } from "./Reveal";
+
 const TechStack = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const categories = [
+    // ... same categories ...
     {
       id: "01",
       title: "Frontend",
@@ -65,99 +69,108 @@ const TechStack = () => {
   return (
     <section
       id="skills"
-      className="py-24 px-2 md:px-8 bg-black relative overflow-hidden border-t border-white/5 -mt-30"
+      className="py-24 px-2 md:px-8 bg-transparent relative overflow-hidden border-t border-white/5"
     >
       <div className="max-w-7xl mx-auto w-full">
-        {/* Main Card Container */}
-        <div className="relative p-8 md:p-16 px-4 rounded-[2rem] border border-white/10 bg-white/[0.02] backdrop-blur-3xl overflow-hidden min-h-[600px] flex flex-col justify-between">
-          {/* Section Label - Moved Top Left & Rebranded */}
-          <div className="absolute top-8 left-8 flex items-center gap-4 z-20">
-            <div className="h-[1px] w-6 bg-hud-cyan/40" />
-            <span className="text-hud-cyan font-mono text-[14px] tracking-[0.3em] uppercase opacity-60 font-bold">
-              [ Tech Stack ]
-            </span>
-          </div>
-
-          <div className="relative flex flex-col items-center md:items-end text-center md:text-right pt-28">
-            {/* Background Index Number - Repositioned Right with Top Spacing */}
-            <div
-              className="absolute -top-5 lg:-top-20 right-0 md:right-60 lg:right-150 text-[10rem] md:text-[14rem] lg:text-[18rem] font-black text-white/[0.04] leading-none pointer-events-none select-none transition-all duration-700"
-              style={{ fontFamily: "var(--font-syne)" }}
-            >
-              {currentCategory.id}
+        <Reveal>
+          {/* Main Card Container */}
+          <div className="relative p-8 md:p-16 px-4 rounded-[2rem] border border-white/10 bg-white/[0.02] backdrop-blur-3xl overflow-hidden min-h-[600px] flex flex-col justify-between">
+            <div className="absolute top-8 left-8 flex items-center gap-4 z-20">
+              <div className="h-[1px] w-6 bg-hud-cyan/40" />
+              <span className="text-hud-cyan font-mono text-[14px] tracking-[0.3em] uppercase opacity-60 font-bold">
+                [ Tech Stack ]
+              </span>
             </div>
 
-            <div className="relative z-10">
-              <h2
-                className="text-4xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter uppercase italic leading-none"
-                style={{ fontFamily: "var(--font-syne)" }}
-              >
-                {currentCategory.title}
-              </h2>
-              <div className="flex justify-center md:justify-end">
-                <p className="text-white/40 font-mono text-[10px] md:text-sm tracking-[0.3em] uppercase text-right mt-4">
-                  {currentCategory.subtitle}
-                </p>
-              </div>
+            <div className="relative flex flex-col items-center md:items-end text-center md:text-right pt-28">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentCategory.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative z-10"
+                >
+                  <div
+                    className="absolute -top-5 lg:-top-20 right-0 md:right-60 lg:right-150 text-[10rem] md:text-[14rem] lg:text-[18rem] font-black text-white/[0.04] leading-none pointer-events-none select-none"
+                    style={{ fontFamily: "var(--font-syne)" }}
+                  >
+                    {currentCategory.id}
+                  </div>
+                  <h2
+                    className="text-4xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter uppercase italic leading-none"
+                    style={{ fontFamily: "var(--font-syne)" }}
+                  >
+                    {currentCategory.title}
+                  </h2>
+                  <div className="flex justify-center md:justify-end">
+                    <p className="text-white/40 font-mono text-[10px] md:text-sm tracking-[0.3em] uppercase text-right mt-4">
+                      {currentCategory.subtitle}
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
-          </div>
 
-          {/* Tech Grid - Vertical Cards */}
-          <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 mt-12">
-            {currentCategory.techs.map((tech, index) => (
-              <div
-                key={index}
-                className="group relative flex flex-col items-center gap-4 p-6 rounded-2xl border border-white/5 bg-white/[0.03] transition-all duration-500 hover:bg-hud-cyan/[0.05]"
+            {/* Tech Grid */}
+            <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 mt-12">
+              <AnimatePresence mode="popLayout">
+                {currentCategory.techs.map((tech, index) => (
+                  <motion.div
+                    key={tech.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className="group relative flex flex-col items-center gap-4 p-6 rounded-2xl border border-white/5 bg-white/[0.03] transition-all duration-500 hover:bg-hud-cyan/[0.05]"
+                  >
+                    <div className="flex items-center justify-center w-12 h-12 rounded-xl group-hover:bg-hud-cyan/10 group-hover:scale-110 transition-all shadow-2xl overflow-hidden p-2">
+                      <NextImage
+                        src={tech.icon}
+                        alt={tech.name}
+                        width={40}
+                        height={40}
+                        unoptimized={tech.icon.endsWith(".svg")}
+                      />
+                    </div>
+                    <span className="text-white/40 font-mono text-[9px] md:text-[10px] uppercase tracking-widest text-center group-hover:text-white transition-colors">
+                      {tech.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+
+            {/* Bottom Interactive Area */}
+            <div className="relative z-10 flex flex-row items-center justify-between mt-6 pt-8 gap-4">
+              <button
+                onClick={nextCategory}
+                className="group relative flex items-center gap-4 px-3 py-2 rounded-full border border-hud-cyan/20 bg-hud-cyan/5 transition-all active:scale-95 hover:border-hud-cyan/60 hover:shadow-[0_0_20px_rgba(0,255,255,0.15)]"
               >
-                <div className="flex items-center justify-center w-12 h-12 rounded-xl group-hover:bg-hud-cyan/10 group-hover:scale-110 transition-all shadow-2xl overflow-hidden p-2">
-                  <NextImage
-                    src={tech.icon}
-                    alt={tech.name}
-                    width={40}
-                    height={40}
-                    unoptimized={tech.icon.endsWith(".svg")}
-                    // className="w-full h-full object-contain filter group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.4)] transition-all"
-                  />
+                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-hud-cyan/20 group-hover:bg-hud-cyan transition-colors">
+                  <IconSwitch />
                 </div>
-                <span className="text-white/40 font-mono text-[9px] md:text-[10px] uppercase tracking-widest text-center group-hover:text-white transition-colors">
-                  {tech.name}
+                <span className="text-white/80 font-mono text-[10px] uppercase tracking-widest font-bold whitespace-nowrap">
+                  Click to switch
+                </span>
+              </button>
+
+              <div className="flex items-center gap-1 bg-white/5 px-6 py-2 rounded-full border border-white/10 font-mono">
+                <span className="text-hud-cyan text-sm font-bold tracking-widest">
+                  {currentCategory.id}
+                </span>
+                <span className="text-white/20 text-xs">/</span>
+                <span className="text-white/40 text-xs">
+                  0{categories.length}
                 </span>
               </div>
-            ))}
-          </div>
-
-          {/* Bottom Interactive Area */}
-          <div className="relative z-10 flex flex-row items-center justify-between mt-6 pt-8 gap-4">
-            <button
-              onClick={nextCategory}
-              className="group relative flex items-center gap-4 px-3 py-2 rounded-full border border-hud-cyan/20 bg-hud-cyan/5 transition-all active:scale-95 hover:border-hud-cyan/60 hover:shadow-[0_0_20px_rgba(0,255,255,0.15)]"
-            >
-              <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-hud-cyan/20 group-hover:bg-hud-cyan transition-colors">
-                <IconSwitch />
-              </div>
-              <span className="text-white/80 font-mono text-[10px] uppercase tracking-widest font-bold whitespace-nowrap">
-                Click to switch
-              </span>
-            </button>
-
-            <div className="flex items-center gap-1 bg-white/5 px-6 py-2 rounded-full border border-white/10 font-mono">
-              <span className="text-hud-cyan text-sm font-bold tracking-widest">
-                {currentCategory.id}
-              </span>
-              <span className="text-white/20 text-xs">/</span>
-              <span className="text-white/40 text-xs">
-                0{categories.length}
-              </span>
             </div>
+            <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-white/10" />
+            <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-white/10" />
           </div>
-
-          {/* HUD Brackets */}
-          <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-white/10" />
-          <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-white/10" />
-        </div>
+        </Reveal>
       </div>
-
-      {/* Background Ambience */}
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-hud-cyan/5 blur-[180px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2" />
     </section>
   );

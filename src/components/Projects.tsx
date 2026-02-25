@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 // Icons
 const IconExternal = () => (
@@ -171,6 +171,9 @@ const StatusBadge = ({ status }: { status: string }) => (
   </span>
 );
 
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { Reveal } from "./Reveal";
+
 const ProjectCard = ({
   project,
   index,
@@ -185,275 +188,322 @@ const ProjectCard = ({
   isAnyHovered: boolean;
   onEnter: () => void;
   onLeave: () => void;
-}) => (
-  <div
-    className="project-card"
-    onMouseEnter={onEnter}
-    onMouseLeave={onLeave}
-    style={{
-      flex: isHovered ? "2.5 1 0%" : "1 1 0%",
-      opacity: isAnyHovered && !isHovered ? 0.4 : 1,
-      transition: "flex 0.55s cubic-bezier(0.4,0,0.2,1), opacity 0.55s ease",
-      cursor: "pointer",
-      border: isHovered
-        ? "1px solid color-mix(in srgb, var(--hud-cyan) 35%, transparent)"
-        : "1px solid rgba(255,255,255,0.07)",
-      boxShadow: isHovered
-        ? "0 0 48px color-mix(in srgb, var(--hud-cyan) 10%, transparent), 0 12px 40px rgba(0,0,0,0.7)"
-        : "0 4px 20px rgba(0,0,0,0.5)",
-      // borderRadius is handled by CSS class
-    }}
-  >
-    {/* ── Full-bleed background image ── */}
-    <img
-      src={project.image}
-      alt={project.title}
-      className="card-image"
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 0,
-        objectPosition: "10% center",
-        transform: isHovered ? "scale(1.06)" : "scale(1)",
-        transition: "transform 0.65s cubic-bezier(0.4,0,0.2,1)",
+}) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const xPct = mouseX / rect.width - 0.5;
+    const yPct = mouseY / rect.height - 0.5;
+
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    onLeave();
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      layout
+      className="project-card"
+      onMouseEnter={onEnter}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{
+        opacity: isAnyHovered && !isHovered ? 0.25 : 1,
+        scale: isAnyHovered && !isHovered ? 0.96 : 1,
+        filter:
+          isAnyHovered && !isHovered
+            ? "grayscale(1) blur(2px)"
+            : "grayscale(0) blur(0px)",
       }}
-    />
-
-    {/* Scanlines */}
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        backgroundImage:
-          "linear-gradient(transparent 50%, rgba(0,0,0,0.3) 50%)",
-        backgroundSize: "100% 3px",
-        opacity: 0.05,
-        pointerEvents: "none",
+      transition={{
+        duration: 0.5,
+        ease: [0.4, 0, 0.2, 1],
       }}
-    />
-
-    {/* Gradient overlay: semi-opaque at top → fully opaque at bottom */}
-    <div
       style={{
-        position: "absolute",
-        inset: 0,
-        background:
-          "linear-gradient(to bottom, rgba(8,13,20,0.45), rgba(8,13,20,1))",
-        pointerEvents: "none",
-      }}
-    />
-
-    {/* ── Status badge ── */}
-    <div style={{ position: "absolute", top: 14, left: 14, zIndex: 10 }}>
-      <StatusBadge status={project.status} />
-    </div>
-
-    {/* ── Watermark number ── */}
-    <div
-      style={{
-        position: "absolute",
-        bottom: 12,
-        right: 14,
-        fontFamily: "var(--font-syne, sans-serif)",
-        fontSize: 100,
-        fontWeight: 900,
-        color: "rgba(255,255,255,0.04)",
-        lineHeight: 1,
-        userSelect: "none",
-        letterSpacing: "-0.04em",
-        pointerEvents: "none",
-        zIndex: 1,
+        flex: isHovered ? "2.5 1 0%" : "1 1 0%",
+        transition: "flex 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+        cursor: "pointer",
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+        border: isHovered
+          ? "1px solid color-mix(in srgb, var(--hud-cyan) 35%, transparent)"
+          : "1px solid rgba(255,255,255,0.07)",
+        boxShadow: isHovered
+          ? "0 0 48px color-mix(in srgb, var(--hud-cyan) 10%, transparent), 0 12px 40px rgba(0,0,0,0.7)"
+          : "0 4px 20px rgba(0,0,0,0.5)",
       }}
     >
-      {project.id}
-    </div>
-
-    {/* ── Content pinned to bottom ── */}
-    <div
-      style={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        padding: "20px 20px 40px",
-        zIndex: 5,
-      }}
-    >
-      {/* Category */}
-      <p
+      {/* ── Full-bleed background image ── */}
+      <img
+        src={project.image}
+        alt={project.title}
+        className="card-image w-full h-full object-cover"
         style={{
-          fontFamily: "var(--font-mono, monospace)",
-          fontSize: 9,
-          color: "var(--hud-cyan)",
-          letterSpacing: "0.28em",
-          textTransform: "uppercase",
-          margin: "0 0 5px",
-          opacity: 0.9,
-          whiteSpace: "nowrap",
-          overflow: "hidden",
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          objectPosition: "10% center",
+          transform: `translateZ(0px) ${isHovered ? "scale(1.06)" : "scale(1)"}`,
+          transition: "transform 0.65s cubic-bezier(0.4,0,0.2,1)",
         }}
-      >
-        {String(index + 1).padStart(2, "0")}&nbsp;·&nbsp;{project.category}
-      </p>
+      />
 
-      {/* Title */}
-      <h3
-        style={{
-          fontFamily: "var(--font-syne, sans-serif)",
-          fontSize: 20,
-          fontWeight: 800,
-          color: "#fff",
-          margin: 0,
-          letterSpacing: "-0.02em",
-          lineHeight: 1.15,
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-        }}
-      >
-        {project.title}
-      </h3>
-
-      {/* ── Extra content — fades in when hovered ── */}
+      {/* Scanlines */}
       <div
         style={{
-          maxHeight: isHovered ? 200 : 0,
-          opacity: isHovered ? 1 : 0,
-          overflow: "hidden",
-          transition:
-            "max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease",
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "linear-gradient(transparent 50%, rgba(0,0,0,0.3) 50%)",
+          backgroundSize: "100% 3px",
+          opacity: 0.05,
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Gradient overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(to bottom, rgba(8,13,20,0.45), rgba(8,13,20,1))",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* ── Status badge ── */}
+      <div style={{ position: "absolute", top: 14, left: 14, zIndex: 10 }}>
+        <StatusBadge status={project.status} />
+      </div>
+
+      {/* ── Watermark number ── */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 12,
+          right: 14,
+          fontFamily: "var(--font-syne, sans-serif)",
+          fontSize: 100,
+          fontWeight: 900,
+          color: "rgba(255,255,255,0.04)",
+          lineHeight: 1,
+          userSelect: "none",
+          letterSpacing: "-0.04em",
+          pointerEvents: "none",
+          zIndex: 1,
         }}
       >
+        {project.id}
+      </div>
+
+      {/* ── Content pinned to bottom ── */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          padding: "20px 20px 40px",
+          zIndex: 15,
+          transform: "translateZ(40px)",
+          transformStyle: "preserve-3d",
+        }}
+      >
+        {/* Category */}
         <p
           style={{
             fontFamily: "var(--font-mono, monospace)",
-            fontSize: 11,
-            color: "rgba(255,255,255,0.6)",
-            lineHeight: 1.75,
-            margin: "12px 0 14px",
+            fontSize: 9,
+            color: "var(--hud-cyan)",
+            letterSpacing: "0.28em",
+            textTransform: "uppercase",
+            margin: "0 0 5px",
+            opacity: 0.9,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
           }}
         >
-          {project.description}
+          {String(index + 1).padStart(2, "0")}&nbsp;·&nbsp;{project.category}
         </p>
 
-        {/* Tech tags */}
-        <div
+        {/* Title */}
+        <h3
           style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 6,
-            marginBottom: 16,
+            fontFamily: "var(--font-syne, sans-serif)",
+            fontSize: 20,
+            fontWeight: 800,
+            color: "#fff",
+            margin: 0,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.15,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
+          {project.title}
+        </h3>
+
+        {/* ── Extra content ── */}
+        <div
+          style={{
+            maxHeight: isHovered ? 200 : 0,
+            opacity: isHovered ? 1 : 0,
+            overflow: "hidden",
+            transition:
+              "max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--font-mono, monospace)",
+              fontSize: 11,
+              color: "rgba(255,255,255,0.6)",
+              lineHeight: 1.75,
+              margin: "12px 0 14px",
+            }}
+          >
+            {project.description}
+          </p>
+
+          {/* Tech tags */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 6,
+              marginBottom: 16,
+            }}
+          >
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                style={{
+                  padding: "3px 10px",
+                  borderRadius: 999,
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "rgba(255,255,255,0.03)",
+                  color: "rgba(255,255,255,0.5)",
+                  fontFamily: "var(--font-mono, monospace)",
+                  fontSize: 9,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Action links */}
+          <div style={{ display: "flex", gap: 10 }}>
+            <a
+              href={project.liveUrl}
+              onClick={(e) => e.stopPropagation()}
               style={{
-                padding: "3px 10px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "7px 16px",
                 borderRadius: 999,
-                border: "1px solid rgba(255,255,255,0.1)",
-                background: "rgba(255,255,255,0.03)",
-                color: "rgba(255,255,255,0.5)",
+                background:
+                  "color-mix(in srgb, var(--hud-cyan) 9%, transparent)",
+                border:
+                  "1px solid color-mix(in srgb, var(--hud-cyan) 27%, transparent)",
+                color: "var(--hud-cyan)",
                 fontFamily: "var(--font-mono, monospace)",
                 fontSize: 9,
-                letterSpacing: "0.14em",
+                fontWeight: 700,
+                letterSpacing: "0.18em",
                 textTransform: "uppercase",
+                textDecoration: "none",
                 whiteSpace: "nowrap",
               }}
             >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Action links */}
-        <div style={{ display: "flex", gap: 10 }}>
-          <a
-            href={project.liveUrl}
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "7px 16px",
-              borderRadius: 999,
-              background: "color-mix(in srgb, var(--hud-cyan) 9%, transparent)",
-              border:
-                "1px solid color-mix(in srgb, var(--hud-cyan) 27%, transparent)",
-              color: "var(--hud-cyan)",
-              fontFamily: "var(--font-mono, monospace)",
-              fontSize: 9,
-              fontWeight: 700,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              whiteSpace: "nowrap",
-            }}
-          >
-            <IconExternal />
-            Demo
-          </a>
-          <a
-            href={project.githubUrl}
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "7px 16px",
-              borderRadius: 999,
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              color: "rgba(255,255,255,0.5)",
-              fontFamily: "var(--font-mono, monospace)",
-              fontSize: 9,
-              fontWeight: 700,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              whiteSpace: "nowrap",
-            }}
-          >
-            <IconGithub />
-            Source
-          </a>
+              <IconExternal />
+              Demo
+            </a>
+            <a
+              href={project.githubUrl}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "7px 16px",
+                borderRadius: 999,
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                color: "rgba(255,255,255,0.5)",
+                fontFamily: "var(--font-mono, monospace)",
+                fontSize: 9,
+                fontWeight: 700,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <IconGithub />
+              Source
+            </a>
+          </div>
         </div>
       </div>
-    </div>
 
-    {/* Corner accents */}
-    <div
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: 18,
-        height: 18,
-        borderTop: `2px solid ${isHovered ? "var(--hud-cyan)" : "rgba(255,255,255,0.1)"}`,
-        borderLeft: `2px solid ${isHovered ? "var(--hud-cyan)" : "rgba(255,255,255,0.1)"}`,
-        borderTopLeftRadius: 18,
-        transition: "border-color 0.4s",
-        pointerEvents: "none",
-        zIndex: 10,
-      }}
-    />
-    <div
-      style={{
-        position: "absolute",
-        bottom: 0,
-        right: 0,
-        width: 18,
-        height: 18,
-        borderBottom: `2px solid ${isHovered ? "var(--hud-cyan)" : "rgba(255,255,255,0.1)"}`,
-        borderRight: `2px solid ${isHovered ? "var(--hud-cyan)" : "rgba(255,255,255,0.1)"}`,
-        borderBottomRightRadius: 18,
-        transition: "border-color 0.4s",
-        pointerEvents: "none",
-        zIndex: 10,
-      }}
-    />
-  </div>
-);
+      {/* Corner accents */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: 18,
+          height: 18,
+          borderTop: `2px solid ${isHovered ? "var(--hud-cyan)" : "rgba(255,255,255,0.1)"}`,
+          borderLeft: `2px solid ${isHovered ? "var(--hud-cyan)" : "rgba(255,255,255,0.1)"}`,
+          borderTopLeftRadius: 18,
+          transition: "border-color 0.4s",
+          pointerEvents: "none",
+          zIndex: 10,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          width: 18,
+          height: 18,
+          borderBottom: `2px solid ${isHovered ? "var(--hud-cyan)" : "rgba(255,255,255,0.1)"}`,
+          borderRight: `2px solid ${isHovered ? "var(--hud-cyan)" : "rgba(255,255,255,0.1)"}`,
+          borderBottomRightRadius: 18,
+          transition: "border-color 0.4s",
+          pointerEvents: "none",
+          zIndex: 10,
+        }}
+      />
+    </motion.div>
+  );
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -467,23 +517,26 @@ const Projects = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      let newVisibleCards = 3;
       if (window.innerWidth < 768) {
-        newVisibleCards = 1;
+        setVisibleCards(1);
       } else if (window.innerWidth < 1024) {
-        newVisibleCards = 2;
+        setVisibleCards(2);
+      } else {
+        setVisibleCards(3);
       }
-
-      setVisibleCards(newVisibleCards);
-      setStartIndex((prev) =>
-        Math.min(prev, Math.max(0, projects.length - newVisibleCards)),
-      );
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Update startIndex to stay within bounds when visibleCards changes
+  useEffect(() => {
+    setStartIndex((prev) =>
+      Math.min(prev, Math.max(0, projects.length - visibleCards)),
+    );
+  }, [visibleCards]);
 
   // Auto-slide logic
   useEffect(() => {
@@ -496,7 +549,7 @@ const Projects = () => {
     }, 4000); // Slide every 4 seconds
 
     return () => clearInterval(interval);
-  }, [isPaused, visibleCards]);
+  }, [isPaused]);
 
   const handleNext = () => {
     setStartIndex((prev) => Math.min(prev + 1, projects.length - visibleCards));
@@ -512,56 +565,60 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-24 px-2 md:px-8 bg-black relative overflow-hidden border-t border-white/5 -mt-25"
+      className="py-24 px-2 md:px-8 bg-black relative overflow-hidden border-t border-white/5"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-16">
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-4">
-              <div className="h-0.5 w-8 bg-hud-cyan/60" />
-              <span className="text-hud-cyan font-mono text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] uppercase">
-                [ Selected Works ]
-              </span>
+        <Reveal delay={0.1}>
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-16">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-4">
+                <div className="h-0.5 w-8 bg-hud-cyan/60" />
+                <span className="text-hud-cyan font-mono text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] uppercase">
+                  [ Selected Works ]
+                </span>
+              </div>
+              <h2
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase italic leading-none"
+                style={{ fontFamily: "var(--font-syne)" }}
+              >
+                My
+                <span className="text-hud-cyan/90 block sm:inline sm:ml-4 md:ml-8 mt-2 sm:mt-0">
+                  projects.
+                </span>
+              </h2>
             </div>
-            <h2
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase italic leading-none"
-              style={{ fontFamily: "var(--font-syne)" }}
-            >
-              My
-              <span className="text-hud-cyan/90 block sm:inline sm:ml-4 md:ml-8 mt-2 sm:mt-0">
-                projects.
-              </span>
-            </h2>
           </div>
-        </div>
+        </Reveal>
 
         {/* ── Horizontal accordion ── */}
-        <div
-          style={{
-            display: "flex",
-            gap: 14,
-            height: 520,
-            width: "100%",
-          }}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          {visibleProjects.map((project, relativeIndex) => {
-            const absoluteIndex = startIndex + relativeIndex;
-            return (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={absoluteIndex}
-                isHovered={hoveredIndex === absoluteIndex}
-                isAnyHovered={hoveredIndex !== null}
-                onEnter={() => setHoveredIndex(absoluteIndex)}
-                onLeave={() => setHoveredIndex(null)}
-              />
-            );
-          })}
-        </div>
+        <Reveal delay={0.3} y={40}>
+          <div
+            style={{
+              display: "flex",
+              gap: 14,
+              height: 520,
+              width: "100%",
+            }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {visibleProjects.map((project, relativeIndex) => {
+              const absoluteIndex = startIndex + relativeIndex;
+              return (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={absoluteIndex}
+                  isHovered={hoveredIndex === absoluteIndex}
+                  isAnyHovered={hoveredIndex !== null}
+                  onEnter={() => setHoveredIndex(absoluteIndex)}
+                  onLeave={() => setHoveredIndex(null)}
+                />
+              );
+            })}
+          </div>
+        </Reveal>
 
         {/* ── Bottom Controls ── */}
         <div className="flex flex-row items-center justify-between gap-6 mt-12 w-full">

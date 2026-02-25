@@ -70,7 +70,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-[#010308] border-t border-white/5 pt-12 pb-8 px-6 overflow-hidden flex flex-col justify-end -mt-15 md:-mt-10">
+    <footer className="relative bg-[#010308] border-t border-white/5 pt-12 pb-8 px-6 overflow-hidden flex flex-col justify-end">
       {/* Massive Background Typography - adapting the reference image's background text */}
       <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none select-none overflow-hidden opacity-5 z-0">
         <h1
@@ -90,7 +90,16 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-end">
           {/* Left: Branding & Info */}
           <div className="flex flex-col gap-4">
-            <a href="#home" className="inline-block group w-fit">
+            <a
+              href="#home"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("home")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="inline-block group w-fit"
+            >
               <span
                 className="text-3xl font-black text-white group-hover:text-hud-cyan transition-colors"
                 style={{ fontFamily: "var(--font-syne)" }}
@@ -112,6 +121,12 @@ const Footer = () => {
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById(link.toLowerCase())
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
                 className="group relative font-mono text-[10px] tracking-widest text-white/50 hover:text-white transition-colors uppercase font-bold"
               >
                 {/* HUD Brackets Effect on Hover */}

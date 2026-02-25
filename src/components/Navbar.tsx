@@ -30,6 +30,22 @@ const Navbar = () => {
     { code: "DE", label: "Deutsch" },
   ];
 
+  const handleScrollTo = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const elem = document.getElementById(targetId);
+    if (elem) {
+      elem.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   return (
     <>
       <nav
@@ -41,7 +57,14 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* ... (rest of the nav content) ... */}
-          <div className="flex items-center gap-3 group cursor-pointer">
+          <div
+            onClick={() =>
+              document
+                .getElementById("home")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="flex items-center gap-3 group cursor-pointer"
+          >
             <div className="relative w-10 h-10 flex items-center justify-center">
               {/* Logo Icon - Hexagon Style SVG */}
               <svg
@@ -72,6 +95,7 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => handleScrollTo(e, link.href)}
                   className="text-[12px] uppercase tracking-[0.2em] text-white/70 hover:text-hud-cyan transition-colors"
                   style={{ fontFamily: "var(--font-mono)", fontWeight: 700 }}
                 >
@@ -161,7 +185,14 @@ const Navbar = () => {
               </div>
 
               {/* CTA Button - Desktop Only */}
-              <button className="hidden md:block relative px-6 py-2 group overflow-hidden border border-hud-cyan/30 hover:border-hud-cyan transition-colors">
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="hidden md:block relative px-6 py-2 group overflow-hidden border border-hud-cyan/30 hover:border-hud-cyan transition-colors"
+              >
                 <div className="absolute inset-0 bg-hud-cyan/5 translate-y-full group-hover:translate-y-0 transition-transform" />
                 <span
                   className="relative text-[10px] uppercase tracking-[0.2em] text-hud-cyan font-bold"
@@ -217,7 +248,7 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => handleScrollTo(e, link.href)}
               className="text-4xl font-black uppercase tracking-tighter text-white hover:text-hud-cyan transition-all italic"
               style={{
                 fontFamily: "var(--font-syne)",
@@ -231,7 +262,13 @@ const Navbar = () => {
           <div className="w-20 h-[1px] bg-hud-cyan/20 mt-4" />
 
           <button
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              const elem = document.getElementById("contact");
+              if (elem) {
+                elem.scrollIntoView({ behavior: "smooth" });
+                setIsMobileMenuOpen(false);
+              }
+            }}
             className="px-10 py-4 border border-hud-cyan/30 text-hud-cyan uppercase tracking-widest text-sm font-bold mt-4 hover:bg-hud-cyan/5 transition-colors"
           >
             Let&apos;s Talk
