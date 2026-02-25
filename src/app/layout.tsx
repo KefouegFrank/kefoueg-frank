@@ -26,7 +26,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const [loading, setLoading] = useState(true);
 
   return (
@@ -35,7 +34,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* {children} */}
-         {loading && <Loader onComplete={() => setLoading(false)} />}
+        {loading && <Loader onComplete={() => setLoading(false)} />}
         {!loading && (
           <>
             <Navbar />

@@ -115,7 +115,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative -mt-30 lg:-mt-0 py-32 px-2 md:px-8 bg-[#010308] min-h-screen flex items-center overflow-hidden border-t border-white/5"
+      className="relative -mt-20 lg:-mt-0 py-32 px-2 md:px-8 bg-[#010308] min-h-screen flex items-center overflow-hidden border-t border-white/5"
     >
       {/* Background Abstract "Blob" and Grid Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">

@@ -15,11 +15,11 @@ export default function Loader({ onComplete }: LoaderProps) {
     const animate = () => {
       // PRODUCTION LOADING LOGIC: Variable speed for realistic feel (~4.5s total)
       let increment = 0.4; // Default fast start
-      
-      if (current > 60) increment = 0.2;     // Slow down mid-way
-      if (current > 85) increment = 0.1;     // Slower towards end
+
+      if (current > 60) increment = 0.2; // Slow down mid-way
+      if (current > 85) increment = 0.1; // Slower towards end
       if (current > 92 && current < 98) increment = 0.02; // Simulate heavy asset stall
-      if (current >= 98) increment = 0.15;   // Final push
+      if (current >= 98) increment = 0.15; // Final push
 
       current += increment;
 
@@ -60,13 +60,13 @@ export default function Loader({ onComplete }: LoaderProps) {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Radial Glow */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,255,0.08)_0%,transparent_70%)]" />
-        
+
         {/* HUD Grid Overlay */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `linear-gradient(rgba(0,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.5) 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
+            backgroundSize: "40px 40px",
           }}
         />
 
@@ -81,25 +81,25 @@ export default function Loader({ onComplete }: LoaderProps) {
         <div className="w-full max-w-2xl flex flex-col justify-center items-center">
           {/* Name Title with Progressive Fill */}
           <div className="relative mb-6 -mt-[5rem] text-left">
-            <h1 
+            <h1
               className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none select-none text-transparent stroke-white"
-              style={{ 
-                WebkitTextStroke: '1px rgba(255,255,255,0.1)',
+              style={{
+                WebkitTextStroke: "1px rgba(255,255,255,0.1)",
                 fontFamily: "var(--font-orbitron)",
-                letterSpacing: '-0.02em'
+                letterSpacing: "-0.02em",
               }}
             >
               Frank <br /> Kefoueg
             </h1>
-            
-            <h1 
+
+            <h1
               className="absolute top-0 left-0 w-full text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none select-none overflow-hidden transition-all duration-300 ease-out"
-              style={{ 
+              style={{
                 clipPath: `inset(0 ${100 - progress}% 0 0)`,
-                color: 'var(--hud-cyan)',
-                textShadow: '0 0 20px var(--hud-cyan-glow)',
+                color: "var(--hud-cyan)",
+                textShadow: "0 0 20px var(--hud-cyan-glow)",
                 fontFamily: "var(--font-orbitron)",
-                letterSpacing: '-0.02em'
+                letterSpacing: "-0.02em",
               }}
             >
               Frank <br /> Kefoueg
@@ -108,19 +108,17 @@ export default function Loader({ onComplete }: LoaderProps) {
 
           {/* Large Centered Percentage */}
           <div className="flex items-start mb-8">
-            <span 
+            <span
               className="text-[100px] md:text-[144px] leading-[80px] md:leading-[144px] italic tracking-tighter transition-all duration-75 text-white"
-              style={{ 
+              style={{
                 fontFamily: "var(--font-syne)",
                 fontWeight: 800,
-                fontVariantNumeric: 'tabular-nums' 
+                fontVariantNumeric: "tabular-nums",
               }}
             >
               {progress.toString().padStart(2, "0")}
             </span>
-            <span 
-              className="text-3xl md:text-6xl font-bold italic text-white/40 ml-6 relative"
-            >
+            <span className="text-3xl md:text-6xl font-bold italic text-white/40 ml-6 relative">
               %
             </span>
           </div>
@@ -136,28 +134,28 @@ export default function Loader({ onComplete }: LoaderProps) {
                 const isPast = tickProgress <= progress;
 
                 return (
-                  <div 
-                    key={i} 
+                  <div
+                    key={i}
                     className={`w-[1px] h-2 -translate-y-[2px] transition-all duration-700 ${
-                      isGlowing 
-                        ? "bg-cyan-400 shadow-[0_0_8px_rgba(0,255,255,0.8)]" 
+                      isGlowing
+                        ? "bg-cyan-400 shadow-[0_0_8px_rgba(0,255,255,0.8)]"
                         : "bg-white/20"
                     }`}
                     style={{
-                      opacity: isGlowing && !isPast ? 0.5 : 1
+                      opacity: isGlowing && !isPast ? 0.5 : 1,
                     }}
                   />
                 );
               })}
-              
+
               {/* Active Progress Bar */}
-              <div 
+              <div
                 className="absolute top-0 left-0 h-full bg-hud-cyan transition-all duration-300 ease-out"
                 style={{ width: `${progress}%` }}
               />
-              
+
               {/* Pulsing Bead */}
-              <div 
+              <div
                 className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_10px_var(--hud-cyan)]"
                 style={{ left: `calc(${progress}% - 4px)` }}
               />
@@ -165,11 +163,15 @@ export default function Loader({ onComplete }: LoaderProps) {
 
             {/* Status Line */}
             <div className="flex justify-between items-center text-[10px] md:text-xs uppercase">
-              <span className="text-hud-cyan/80 font-mono">{getStatus(progress)}</span>
-              <span 
+              <span className="text-hud-cyan/80 font-mono">
+                {getStatus(progress)}
+              </span>
+              <span
                 className="text-white/40 tracking-tighter"
                 style={{ fontFamily: "var(--font-syne)", fontWeight: 700 }}
-              >{currentStep} / 8</span>
+              >
+                {currentStep} / 8
+              </span>
             </div>
           </div>
         </div>
@@ -177,7 +179,9 @@ export default function Loader({ onComplete }: LoaderProps) {
 
       {/* Bottom Loading Indicator - Aligned with bottom brackets, more spacing */}
       <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-3 text-[10px] tracking-[0.4em] text-white/20 font-mono uppercase whitespace-nowrap">
-        <div className={`w-2 h-2 rounded-full bg-hud-cyan shadow-[0_0_5px_var(--hud-cyan)] ${progress === 100 ? 'animate-ping' : 'animate-pulse'}`} />
+        <div
+          className={`w-2 h-2 rounded-full bg-hud-cyan shadow-[0_0_5px_var(--hud-cyan)] ${progress === 100 ? "animate-ping" : "animate-pulse"}`}
+        />
         {progress === 100 ? "LAUNCHING INTERFACE..." : "LOADING PORTFOLIO"}
       </div>
     </div>
