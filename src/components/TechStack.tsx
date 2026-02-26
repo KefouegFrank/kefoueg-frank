@@ -119,13 +119,38 @@ const TechStack = () => {
                 {currentCategory.techs.map((tech, index) => (
                   <motion.div
                     key={tech.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                    className="group relative flex flex-col items-center gap-4 p-6 rounded-2xl border border-white/5 bg-white/[0.03] transition-all duration-500 hover:bg-hud-cyan/[0.05]"
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    whileHover="hover"
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.8 },
+                      visible: {
+                        opacity: 1,
+                        scale: 1,
+                        transition: { duration: 0.3, delay: index * 0.05 },
+                      },
+                      hover: {
+                        scale: 1.08,
+                        borderColor: "rgba(0, 255, 255, 0.3)",
+                        backgroundColor: "rgba(0, 255, 255, 0.08)",
+                        transition: { duration: 0.2, ease: "easeOut" },
+                      },
+                    }}
+                    className="group relative flex flex-col items-center gap-4 p-6 rounded-2xl border border-white/5 bg-white/[0.03] cursor-pointer"
                   >
-                    <div className="flex items-center justify-center w-12 h-12 rounded-xl group-hover:bg-hud-cyan/10 group-hover:scale-110 transition-all shadow-2xl overflow-hidden p-2">
+                    <motion.div
+                      variants={{
+                        hidden: { scale: 1, rotate: 0 },
+                        visible: { scale: 1, rotate: 0 },
+                        hover: {
+                          scale: 1.25,
+                          rotate: 8,
+                          transition: { type: "spring", stiffness: 300 },
+                        },
+                      }}
+                      className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/5 group-hover:bg-hud-cyan/10 transition-all shadow-2xl overflow-hidden p-2"
+                    >
                       <NextImage
                         src={tech.icon}
                         alt={tech.name}
@@ -133,7 +158,7 @@ const TechStack = () => {
                         height={40}
                         unoptimized={tech.icon.endsWith(".svg")}
                       />
-                    </div>
+                    </motion.div>
                     <span className="text-white/40 font-mono text-[9px] md:text-[10px] uppercase tracking-widest text-center group-hover:text-white transition-colors">
                       {tech.name}
                     </span>

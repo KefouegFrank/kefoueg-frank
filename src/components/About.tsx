@@ -5,25 +5,24 @@ import { Reveal } from "./Reveal";
 
 const About = () => {
   const education = [
-    // ... same education data ...
     {
-      year: "2013 - 2017",
-      degree: "BSc Computer Science",
-      institution: "University of Technology • Distinctions",
+      year: "2023 - 2024",
+      degree: "B. Tech in Software Engineering",
+      institution: "Institut Universitaire des Grandes Écoles des Tropiques",
       modules: [
-        "Distributed Systems",
-        "Software Architecture",
-        "Algorithmic Analysis",
+        "Advanced Web Engineering",
+        "System Architecture",
+        "Database Design",
       ],
     },
     {
-      year: "2016",
-      degree: "Advanced Web Engineering",
-      institution: "Tech Academy Certification",
+      year: "2020 - 2022",
+      degree: "HND in Software Engineering",
+      institution: "Institut Universitaire des Grandes Écoles des Tropiques",
       modules: [
-        "Modern Frontend Frameworks",
-        "Scalable Backend Patterns",
-        "Cloud Infrastructure",
+        "Programming Fundamentals",
+        "Backend Patterns",
+        "Frontend Development",
       ],
     },
   ];
@@ -112,29 +111,29 @@ const About = () => {
             repeat: Infinity,
             ease: "easeOut",
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border-2 border-hud-cyan/50 rounded-full shadow-[0_0_30px_rgba(0,255,255,0.2)]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border-2 border-hud-cyan/30 rounded-full shadow-[0_0_30px_rgba(0,255,255,0.2)]"
         />
 
         {/* Ambient Glow */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,255,0.05)_0%,transparent_70%)]" />
 
         {/* Technical Corner Brackets */}
-        <div className="absolute top-4 left-4 w-24 h-24 border-t border-l border-hud-cyan/20">
+        <div className="absolute top-4 left-2 lg:left-6 w-24 h-24 border-t border-l border-hud-cyan/20">
           <span className="absolute top-2 left-2 font-mono text-[8px] text-hud-cyan/40 tracking-wider">
             [ID_FRANK]
           </span>
         </div>
-        <div className="absolute top-4 right-4 w-24 h-24 border-t border-r border-hud-cyan/20">
+        <div className="absolute top-4 right-2 lg:right-6 w-24 h-24 border-t border-r border-hud-cyan/20">
           <span className="absolute top-2 right-2 font-mono text-[8px] text-hud-cyan/40 tracking-wider">
             00:0{new Date().getHours()}:XX
           </span>
         </div>
-        <div className="absolute bottom-4 left-4 w-24 h-24 border-b border-l border-hud-cyan/20">
+        <div className="absolute bottom-4 left-2 lg:left-6 w-24 h-24 border-b border-l border-hud-cyan/20">
           <span className="absolute bottom-2 left-2 font-mono text-[8px] text-hud-cyan/40 tracking-wider">
             [BIO_VERIFIED]
           </span>
         </div>
-        <div className="absolute bottom-4 right-4 w-24 h-24 border-b border-r border-hud-cyan/20">
+        <div className="absolute bottom-4 right-2 lg:right-6 w-24 h-24 border-b border-r border-hud-cyan/20">
           <span className="absolute bottom-2 right-2 font-mono text-[8px] text-hud-cyan/40 tracking-wider">
             LAT: 4.05 / LON: 9.7
           </span>
@@ -166,14 +165,20 @@ const About = () => {
 
             <Reveal delay={0.3}>
               <p className="text-white/60 text-sm leading-relaxed font-mono max-w-xl">
-                I am Frank Kefoueg, a passionate Software Engineer with over 5
-                years of experience in the tech industry. I have developed a
-                deep passion for building scalable software solutions and I
-                thrive in environments that challenge me to solve complex
-                problems while keeping the user experience at the forefront. My
-                approach combines rigorous engineering practices with an eye for
-                clean, functional design, believing that great software is about
-                creating meaningful impact.
+                I am T. Kefoueg Frank Parker, a Full Stack Software Engineer
+                specializing in designing, developing, and deploying scalable
+                web applications.
+                <br />
+                <br />
+                With strong expertise across frontend, backend, and AI
+                integration, I focus on building production-ready systems using
+                React.js, Next.js, Node.js, Laravel, and Python. I am
+                experienced in developing robust RESTful APIs, integrating
+                AI-powered features, optimizing global performance, and
+                collaborating in fast-paced agile environments. I am deeply
+                passionate about clean architecture, continuous learning, and
+                delivering reliable digital solutions that create meaningful
+                impact.
               </p>
             </Reveal>
           </div>

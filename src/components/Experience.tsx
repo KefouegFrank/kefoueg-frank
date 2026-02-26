@@ -6,49 +6,51 @@ const Experience = () => {
   // ... experiences, softSkills, metrics data ...
   const experiences = [
     {
-      year: "2021 - Present",
-      role: "Software Engineer",
-      company: "Tech Solutions Inc.",
+      year: "July 2025 - Present",
+      role: "Freelance Full-Stack Developer",
+      company: "Independent",
       achievements: [
-        "Architected scalable microservices using Node.js and AWS.",
-        "Led frontend modernization with Next.js and Tailwind CSS.",
-        "Optimized database performance by 40% through advanced indexing.",
+        "Designed and developed a full-stack platform connecting certified fitness coaches with clients, handling the complete product lifecycle from requirements gathering to production deployment.",
+        "Built with Next.js (App Router), TypeScript, PostgreSQL, Prisma ORM, custom JWT authentication with RBAC, Pusher for real-time messaging, Cloudflare R2 for secure media storage, and Redis-backed rate limiting.",
+        "Managed domain purchase, DNS configuration, Vercel deployment, and staging-to-production pipeline independently.",
+        "Conducted structured client discovery through a documented PRD before writing a single line of code.",
       ],
     },
     {
-      year: "2019 - 2021",
+      year: "Sept 2023 - May 2025",
       role: "Full Stack Developer",
-      company: "Creative Digital Agency",
+      company: "Livquiz Ltd (Remote)",
       achievements: [
-        "Developed custom e-commerce solutions for global clients.",
-        "Integrated secure payment gateways and real-time order tracking.",
-        "Improved site load speeds by 50% via image optimization and caching.",
+        "Designed and developed responsive, pixel-perfect web applications using React.js and Next.js.",
+        "Implemented modern frontend architectures leveraging SSR and SSG to improve performance and SEO.",
+        "Engineered an AI-powered educational content generation module, integrating Claude and Assembly AI.",
+        "Designed, consumed, and maintained robust RESTful APIs ensuring secure data flow.",
       ],
     },
     {
-      year: "2018",
-      role: "Junior Web Developer",
-      company: "Startup Hub",
+      year: "Feb 2023 - July 2023",
+      role: "Full Stack Developer (Internship)",
+      company: "Levegi Sarl",
       achievements: [
-        "Built responsive marketing landing pages using React.",
-        "Collaborated with UI/UX designers to implement pixel-perfect designs.",
-        "Maintained and updated legacy WordPress sites.",
+        "Contributed to the design and development of dynamic web apps using React.js and Laravel.",
+        "Implemented clean UI layouts, reusable components, and back-end integrations.",
+        "Participated in scrum meetings and sprint planning within an agile remote environment.",
       ],
     },
   ];
 
   const softSkills = [
+    "Communication",
     "Problem Solving",
-    "Technical Leadership",
-    "Effective Communication",
-    "Agile Methodology",
-    "Analytical Thinking",
-    "Adaptive Learning",
+    "Creativity",
+    "Collaboration",
+    "Adaptability",
+    "Fast Learning",
   ];
 
   const metrics = [
-    { value: ["Currently", "Gaining"], label: "YEARS EXPE." },
-    { value: ["3+", "good"], label: "PROJECTS" },
+    { value: ["3+"], label: "YEARS EXP." },
+    { value: ["4+"], label: "PROJECTS" },
     { value: ["10+"], label: "TECH STACKS" },
   ];
 
@@ -89,7 +91,7 @@ const Experience = () => {
             </Reveal>
 
             <div className="relative mt-8 group/timeline">
-              <div className="max-h-[380px] overflow-y-auto pr-2 scrollbar-hide">
+              <div className="max-h-[500px] overflow-y-auto pr-2 scrollbar-hide">
                 <div className="relative pl-8 space-y-10 pb-8">
                   {/* Timeline Vertical Line */}
                   <div className="absolute left-[11px] top-2 bottom-2 w-[1px] bg-white/10" />

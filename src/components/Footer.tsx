@@ -145,14 +145,18 @@ const Footer = () => {
           <div className="flex flex-col md:items-end gap-6 w-full">
             <div className="flex items-center gap-4">
               <a
-                href="#"
+                href="https://github.com/KefouegFrank"
+                target="_blank"
+                rel="noopener noreferrer"
                 title="GitHub"
                 className="flex items-center justify-center p-3 border border-white/10 rounded-xl bg-white/[0.02] hover:text-hud-cyan hover:border-hud-cyan/40 hover:bg-hud-cyan/5 transition-all text-white/50"
               >
                 <IconGithub />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/kefoueg-frank-61b64424a"
+                target="_blank"
+                rel="noopener noreferrer"
                 title="LinkedIn"
                 className="flex items-center justify-center p-3 border border-white/10 rounded-xl bg-white/[0.02] hover:text-hud-cyan hover:border-hud-cyan/40 hover:bg-hud-cyan/5 transition-all text-white/50"
               >

@@ -70,68 +70,89 @@ interface Project {
   liveUrl: string;
   githubUrl: string;
   category: string;
-  status: "In Progress" | "Live" | "Open Source";
+  status: "In Progress" | "Live" | "Open Source" | "In Construction";
 }
 
 const projects: Project[] = [
   {
     id: "01",
-    title: "Mandara Fitness",
+    title: "CoachMe",
     description:
-      "A comprehensive fitness platform for workout tracking and personalized routines. Real-time progress, nutrition plans, and social features.",
-    tags: ["React", "Next.js", "Tailwind", "Supabase"],
+      "A coaching marketplace platform connecting certified fitness coaches with prospects. Features role-based access, real-time 1:1 messaging, secure media storage, and multilingual support.",
+    tags: [
+      "Next.js 16",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "Pusher",
+      "Redis",
+    ],
     image: "/project-images/mandara.PNG",
-    liveUrl: "#",
+    liveUrl: "https://coachme-by-ecotofitness.com/",
     githubUrl: "#",
-    category: "Full Stack",
-    status: "In Progress",
+    category: "SaaS / Marketplace",
+    status: "Live",
   },
   {
     id: "02",
-    title: "LinguaMentor",
+    title: "Livquiz",
     description:
-      "Language learning app with AI-driven feedback, adaptive quizzes, and real-time progress tracking.",
-    tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
-    image: "/project-images/linguamentor.PNG",
+      "An educational platform designed for dynamic quiz management and user engagement. Developed with a high-performance frontend architecture that seamlessly consumes and integrates robust RESTful APIs.",
+    tags: ["Next.js", "React.js", "REST APIs", "SCSS"],
+    image: "/project-images/livquiz.PNG",
     liveUrl: "#",
     githubUrl: "#",
-    category: "EdTech",
+    category: "EdTech Platform",
     status: "Live",
   },
   {
     id: "03",
-    title: "Personal Portfolio",
+    title: "LinguaMentor",
     description:
-      "A high-impact 3D interactive portfolio showcasing software engineering expertise with immersive HUD aesthetics.",
-    tags: ["Next.js", "CSS", "Three.js", "Framer Motion"],
-    image: "/project-images/portfolio.PNG",
+      "An AI-Orchestrated Language Proficiency Evaluation and Adaptation System. Designed to teach, evaluate, adapt, and predict exam readiness autonomously at scale using localized LLMs and voice models.",
+    tags: [
+      "Next.js",
+      "Node.js",
+      "FastAPI",
+      "Python",
+      "AI Models",
+      "TypeScript",
+    ],
+    image: "/project-images/linguamentor.PNG",
     liveUrl: "#",
     githubUrl: "#",
-    category: "Frontend",
-    status: "Open Source",
+    category: "AI EdTech",
+    status: "In Construction",
   },
   {
     id: "04",
-    title: "AI Image Generator",
+    title: "AI Educational Backend",
     description:
-      "A fast, capable AI image generation tool utilizing stable diffusion models. Generate images from text prompts instantly.",
-    tags: ["React", "TypeScript", "Python", "FastAPI"],
-    image: "/project-images/mandara.PNG", // Placeholder
+      "A robust Node.js/TypeScript backend API for AI-powered educational content generation and media processing. Features advanced middleware for validation, rate limiting, and integrations with OpenAI GPT, Claude, and AssemblyAI.",
+    tags: [
+      "Node.js",
+      "Express",
+      "TypeScript",
+      "OpenAI",
+      "Claude",
+      "AssemblyAI",
+    ],
+    image: "/project-images/ai-educational-backend.PNG",
     liveUrl: "#",
     githubUrl: "#",
-    category: "AI",
+    category: "Backend API",
     status: "Live",
   },
   {
     id: "05",
-    title: "E-Commerce Dashboard",
+    title: "Personal Portfolio",
     description:
-      "A complex analytics dashboard for e-commerce platforms. Real-time sales data, inventory alerts, and customer insights.",
-    tags: ["Vue.js", "Node.js", "MongoDB", "Charts.js"],
-    image: "/project-images/linguamentor.PNG", // Placeholder
-    liveUrl: "#",
-    githubUrl: "#",
-    category: "Full Stack",
+      "A high-impact 3D interactive portfolio showcasing software engineering expertise. Built with immersive HUD aesthetics, custom particle systems, and advanced Framer Motion physics.",
+    tags: ["Next.js", "Three.js", "Framer Motion", "Tailwind CSS"],
+    image: "/project-images/portfolio.PNG",
+    liveUrl: "https://kefoueg-frank.vercel.app/",
+    githubUrl: "https://github.com/KefouegFrank/portfolio",
+    category: "Frontend",
     status: "Live",
   },
 ];
@@ -419,6 +440,8 @@ const ProjectCard = ({
             <a
               href={project.liveUrl}
               onClick={(e) => e.stopPropagation()}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -445,6 +468,8 @@ const ProjectCard = ({
             <a
               href={project.githubUrl}
               onClick={(e) => e.stopPropagation()}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

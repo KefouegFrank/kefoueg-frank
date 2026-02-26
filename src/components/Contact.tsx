@@ -88,7 +88,7 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
 
-  const emailAddress = "hello@frankkefoueg.com"; // Replace with actual email
+  const emailAddress = "kefoueg@gmail.com"; // Replace with actual email
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -102,14 +102,33 @@ const Contact = () => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setFormState({ name: "", email: "", subject: "", message: "" });
+        alert("Message Sent! I will get back to you shortly.");
+      } else {
+        alert(`Error: ${data.message || "Failed to send message"}`);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("An unexpected error occurred. Please try again later.");
+    } finally {
       setIsSubmitting(false);
-      setFormState({ name: "", email: "", subject: "", message: "" });
-      alert("Message Sent! I will get back to you shortly.");
-    }, 1500);
+    }
   };
 
   return (
@@ -183,13 +202,17 @@ const Contact = () => {
             {/* Social Icons */}
             <div className="flex sm:flex-col md:flex-row lg:flex-col gap-4 w-full sm:w-auto">
               <a
-                href="#"
+                href="https://github.com/KefouegFrank"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex-1 lg:w-16 flex items-center justify-center p-4 border border-white/10 rounded-2xl bg-white/[0.02] hover:text-hud-cyan hover:border-hud-cyan/40 hover:bg-hud-cyan/5 transition-all text-white/50"
               >
                 <IconGithub />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/kefoueg-frank-61b64424a"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex-1 lg:w-16 flex items-center justify-center p-4 border border-white/10 rounded-2xl bg-white/[0.02] hover:text-hud-cyan hover:border-hud-cyan/40 hover:bg-hud-cyan/5 transition-all text-white/50"
               >
                 <IconLinkedIn />

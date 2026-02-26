@@ -7,14 +7,14 @@ import { Points, PointMaterial, Preload, Float } from "@react-three/drei";
 
 const Nebula = () => {
   return (
-    <Float speed={1} rotationIntensity={0.5} floatIntensity={0.5}>
-      <mesh position={[2, -1, -5]}>
-        <sphereGeometry args={[5, 32, 32]} />
+    <Float speed={0.8} rotationIntensity={0.5} floatIntensity={0.3}>
+      <mesh position={[4, -1, -8]}>
+        <sphereGeometry args={[3.5, 32, 32]} />
         <meshBasicMaterial color="#00ffff" transparent opacity={0.05} />
       </mesh>
-      <mesh position={[-3, 2, -7]}>
-        <sphereGeometry args={[4, 32, 32]} />
-        <meshBasicMaterial color="#0055ff" transparent opacity={0.03} />
+      <mesh position={[-4, 2, -10]}>
+        <sphereGeometry args={[2.5, 32, 32]} />
+        <meshBasicMaterial color="#0055ff" transparent opacity={0.05} />
       </mesh>
     </Float>
   );
