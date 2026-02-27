@@ -70,7 +70,7 @@ interface Project {
   liveUrl: string;
   githubUrl: string;
   category: string;
-  status: "In Progress" | "Live" | "Open Source" | "In Construction";
+  status: "In Progress" | "Live" | "Open Source" | "In Construction" | "Confidential";
 }
 
 const projects: Project[] = [
@@ -100,7 +100,7 @@ const projects: Project[] = [
       "An educational platform designed for dynamic quiz management and user engagement. Developed with a high-performance frontend architecture that seamlessly consumes and integrates robust RESTful APIs.",
     tags: ["Next.js", "React.js", "REST APIs", "SCSS"],
     image: "/project-images/livquiz.PNG",
-    liveUrl: "#",
+    liveUrl: "https://www.livquiz.com/",
     githubUrl: "#",
     category: "EdTech Platform",
     status: "Live",
@@ -141,7 +141,7 @@ const projects: Project[] = [
     liveUrl: "#",
     githubUrl: "#",
     category: "Backend API",
-    status: "Live",
+    status: "Confidential",
   },
   {
     id: "05",
@@ -150,8 +150,8 @@ const projects: Project[] = [
       "A high-impact 3D interactive portfolio showcasing software engineering expertise. Built with immersive HUD aesthetics, custom particle systems, and advanced Framer Motion physics.",
     tags: ["Next.js", "Three.js", "Framer Motion", "Tailwind CSS"],
     image: "/project-images/portfolio.PNG",
-    liveUrl: "https://kefoueg-frank.vercel.app/",
-    githubUrl: "https://github.com/KefouegFrank/portfolio",
+    liveUrl: "#",
+    githubUrl: "https://github.com/KefouegFrank/kefoueg-frank",
     category: "Frontend",
     status: "Live",
   },
