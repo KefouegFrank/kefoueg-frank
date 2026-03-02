@@ -5,39 +5,39 @@ import { Reveal } from "./Reveal";
 const Experience = () => {
   // ... experiences, softSkills, metrics data ...
   const experiences = [
-    {
-      year: "July 2025 - Present",
-      role: "Freelance Full-Stack Developer",
-      company: "Independent",
-      achievements: [
-        "Designed and developed a full-stack platform connecting certified fitness coaches with clients, handling the complete product lifecycle from requirements gathering to production deployment.",
-        "Built with Next.js (App Router), TypeScript, PostgreSQL, Prisma ORM, custom JWT authentication with RBAC, Pusher for real-time messaging, Cloudflare R2 for secure media storage, and Redis-backed rate limiting.",
-        "Managed domain purchase, DNS configuration, Vercel deployment, and staging-to-production pipeline independently.",
-        "Conducted structured client discovery through a documented PRD before writing a single line of code.",
-      ],
-    },
-    {
-      year: "Sept 2023 - May 2025",
-      role: "Full Stack Developer",
-      company: "Livquiz Ltd (Remote)",
-      achievements: [
-        "Designed and developed responsive, pixel-perfect web applications using React.js and Next.js.",
-        "Implemented modern frontend architectures leveraging SSR and SSG to improve performance and SEO.",
-        "Engineered an AI-powered educational content generation module, integrating Claude and Assembly AI.",
-        "Designed, consumed, and maintained robust RESTful APIs ensuring secure data flow.",
-      ],
-    },
-    {
-      year: "Feb 2023 - July 2023",
-      role: "Full Stack Developer (Internship)",
-      company: "Levegi Sarl",
-      achievements: [
-        "Contributed to the design and development of dynamic web apps using React.js and Laravel.",
-        "Implemented clean UI layouts, reusable components, and back-end integrations.",
-        "Participated in scrum meetings and sprint planning within an agile remote environment.",
-      ],
-    },
-  ];
+  {
+    year: "2024 – Present",
+    role: "Freelance Full-Stack Developer",
+    company: "Independent",
+    achievements: [
+      "Designed and delivered CoachMe — a full-stack SaaS platform connecting certified fitness coaches with clients — handling the complete product lifecycle from client discovery and PRD documentation to production deployment.",
+      "Architected a multi-role system (Admin / Coach / Client) with custom JWT-based RBAC, bcrypt hashing, and httpOnly cookie session management — full control over token lifecycle without third-party auth abstractions.",
+      "Built real-time 1:1 messaging via Pusher WebSocket channels with database-level read-receipt tracking; optimised PostgreSQL schema with strategic Prisma @@index annotations — reducing query time from seconds to milliseconds.",
+      "Integrated Cloudflare R2 for secure media storage via pre-signed URLs, Upstash Redis rate limiting, full i18n (EN/FR); managed domain purchase, DNS configuration, and staging-to-production pipeline independently.",
+    ],
+  },
+  {
+    year: "Sept 2023 – May 2025",
+    role: "Full-Stack Developer",
+    company: "Livquiz Ltd (Remote)",
+    achievements: [
+    "Owned and built key user-facing features end to end — including the quiz creation flow (manual and AI-assisted modes), community screen, personalised onboarding flow, and all marketing landing pages — translating Figma designs into pixel-perfect, responsive Next.js interfaces.",
+    "Built a reusable component architecture and design system ensuring visual consistency across the platform; implemented SSR/SSG strategies to improve Core Web Vitals and SEO; handled REST API integration with robust state management, error boundaries, and loading states.",
+    "Engineered a standalone AI content-generation backend (13 service modules) abstracting Anthropic Claude and OpenAI GPT — multi-modal ingestion across 30+ platforms, parallel batch processing via Promise.all, and 6-tier subscription enforcement middleware.",
+    "Collaborated in Agile/Scrum sprints across a cross-functional remote team — participating in code reviews, sprint planning, and CI/CD delivery across both frontend and backend streams.",
+  ],
+  },
+  {
+    year: "Feb 2023 – Jul 2023",
+    role: "Full-Stack Developer — Internship",
+    company: "Levegi Sarl",
+    achievements: [
+      "Built Ensemble.cm (Laravel + MySQL) — a social platform for blogging, job listings, and user interaction — including admin dashboard, role-based access control, and secure authentication.",
+      "Developed the Trip Management System RESTful API: designed and documented endpoints for trip creation, updates, and user management with authentication, data validation, and RBAC.",
+      "Participated in Agile/Scrum ceremonies — sprint planning, standups, and retrospectives — gaining hands-on experience in cross-functional team collaboration.",
+    ],
+  },
+];
 
   const softSkills = [
     "Communication",
@@ -50,8 +50,8 @@ const Experience = () => {
 
   const metrics = [
     { value: ["3+"], label: "YEARS EXP." },
-    { value: ["4+"], label: "PROJECTS" },
-    { value: ["10+"], label: "TECH STACKS" },
+    { value: ["3+"], label: "PROJECTS" },
+    { value: ["8+"], label: "TECH STACKS" },
   ];
 
   return (

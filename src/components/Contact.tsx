@@ -162,8 +162,9 @@ const Contact = () => {
           </h2>
 
           <p className="text-white/50 font-mono text-sm leading-relaxed max-w-md -mt-3 lg:-mt-5">
-            Open to freelance projects, full-time roles & interesting
-            collaborations. If you&apos;ve got an idea — let&apos;s talk.
+            Based in Cameroon — available globally for remote full-time 
+roles and freelance projects. If you are building something 
+that needs solid engineering, let's talk
           </p>
 
           <div className="flex items-center gap-3 px-5 py-3 w-fit border border-white/10 rounded-2xl bg-white/[0.02] backdrop-blur-sm lg:-mt-3">

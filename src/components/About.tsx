@@ -165,20 +165,28 @@ const About = () => {
 
             <Reveal delay={0.3}>
               <p className="text-white/60 text-sm leading-relaxed font-mono max-w-xl">
-                I am T. Kefoueg Frank Parker, a Full Stack Software Engineer
-                specializing in designing, developing, and deploying scalable
-                web applications.
+                I am T. Kefoueg Frank Parker — a Full-Stack Software Engineer
+                from Douala, Cameroon, building toward the global tech
+                ecosystem. <br />
+                <br />
+                I work across the full stack: frontend interfaces with React.js
+                and Next.js, backend systems with Node.js, Express, and Laravel,
+                and AI-powered features using Anthropic Claude, OpenAI GPT, and
+                AssemblyAI in live production environments.
                 <br />
                 <br />
-                With strong expertise across frontend, backend, and AI
-                integration, I focus on building production-ready systems using
-                React.js, Next.js, Node.js, Laravel, and Python. I am
-                experienced in developing robust RESTful APIs, integrating
-                AI-powered features, optimizing global performance, and
-                collaborating in fast-paced agile environments. I am deeply
-                passionate about clean architecture, continuous learning, and
-                delivering reliable digital solutions that create meaningful
-                impact.
+                But what defines my engineering is not the stack — it is the
+                thinking before the code. I document requirements before I open
+                my editor. I ask why before I ask how. I design for the team
+                that inherits the codebase, not just for the deadline.
+                <br />
+                <br />
+                I believe knowing when NOT to code is a more valuable skill than
+                coding itself. And I believe the best code is the code your team
+                can understand six months later — not the cleverest code.
+                <br />
+                <br />
+                Open to remote full-time roles and freelance projects globally.
               </p>
             </Reveal>
           </div>

@@ -6,11 +6,10 @@ import NextImage from "next/image";
 import NeuralCore from "./canvas/NeuralCore";
 
 const stacks = [
-  "Fullstack Software Engineer",
-  "Web Developer",
-  "Backend Developer",
-  "Frontend Developer",
-  "AI Engineer",
+ "Full-Stack Software Engineer",
+"Backend Architect",
+"AI Integration Engineer",
+"Production Systems Builder",
 ];
 
 const Hero = () => {
@@ -90,10 +89,10 @@ const Hero = () => {
 
           {/* Description */}
           <p className="max-w-xl text-sm md:text-base text-white/50 font-mono leading-relaxed">
-            Software Engineer (Full Stack) specializing in designing,
-            developing, and deploying scalable web applications. Strong
-            expertise across frontend, backend, and AI integration, with a focus
-            on building production-ready systems.
+            Full-Stack Engineer building production-ready systems across 
+frontend, backend, and AI integration. I ship real products — 
+from architecture and database design to deployment and DNS. 
+Based in Cameroon, working globally
           </p>
 
           {/* Action Buttons */}
