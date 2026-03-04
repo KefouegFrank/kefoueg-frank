@@ -70,7 +70,7 @@ interface Project {
   liveUrl: string;
   githubUrl: string;
   category: string;
-  status: "In Progress" | "Live" | "Open Source" | "In Construction" | "Confidential";
+  status: "In Progress" | "Live" | "Open Source" | "In Development" | "Confidential";
 }
 
 const projects: Project[] = [
