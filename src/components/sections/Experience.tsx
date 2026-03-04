@@ -1,59 +1,10 @@
 "use client";
 
-import { Reveal } from "./Reveal";
+import { Reveal } from "../ui/Reveal";
+import { EXPERIENCE, SOFT_SKILLS, METRICS } from "../../constants";
+import { ExperienceItem, Metric } from "../../types";
 
 const Experience = () => {
-  // ... experiences, softSkills, metrics data ...
-  const experiences = [
-  {
-    year: "2024 – Present",
-    role: "Freelance Full-Stack Developer",
-    company: "Independent",
-    achievements: [
-      "Designed and delivered CoachMe — a full-stack SaaS platform connecting certified fitness coaches with clients — handling the complete product lifecycle from client discovery and PRD documentation to production deployment.",
-      "Architected a multi-role system (Admin / Coach / Client) with custom JWT-based RBAC, bcrypt hashing, and httpOnly cookie session management — full control over token lifecycle without third-party auth abstractions.",
-      "Built real-time 1:1 messaging via Pusher WebSocket channels with database-level read-receipt tracking; optimised PostgreSQL schema with strategic Prisma @@index annotations — reducing query time from seconds to milliseconds.",
-      "Integrated Cloudflare R2 for secure media storage via pre-signed URLs, Upstash Redis rate limiting, full i18n (EN/FR); managed domain purchase, DNS configuration, and staging-to-production pipeline independently.",
-    ],
-  },
-  {
-    year: "Sept 2023 – May 2025",
-    role: "Full-Stack Developer",
-    company: "Livquiz Ltd (Remote)",
-    achievements: [
-    "Owned and built key user-facing features end to end — including the quiz creation flow (manual and AI-assisted modes), community screen, personalised onboarding flow, and all marketing landing pages — translating Figma designs into pixel-perfect, responsive Next.js interfaces.",
-    "Built a reusable component architecture and design system ensuring visual consistency across the platform; implemented SSR/SSG strategies to improve Core Web Vitals and SEO; handled REST API integration with robust state management, error boundaries, and loading states.",
-    "Engineered a standalone AI content-generation backend (13 service modules) abstracting Anthropic Claude and OpenAI GPT — multi-modal ingestion across 30+ platforms, parallel batch processing via Promise.all, and 6-tier subscription enforcement middleware.",
-    "Collaborated in Agile/Scrum sprints across a cross-functional remote team — participating in code reviews, sprint planning, and CI/CD delivery across both frontend and backend streams.",
-  ],
-  },
-  {
-    year: "Feb 2023 – Jul 2023",
-    role: "Full-Stack Developer — Internship",
-    company: "Levegi Sarl",
-    achievements: [
-      "Built Ensemble.cm (Laravel + MySQL) — a social platform for blogging, job listings, and user interaction — including admin dashboard, role-based access control, and secure authentication.",
-      "Developed the Trip Management System RESTful API: designed and documented endpoints for trip creation, updates, and user management with authentication, data validation, and RBAC.",
-      "Participated in Agile/Scrum ceremonies — sprint planning, standups, and retrospectives — gaining hands-on experience in cross-functional team collaboration.",
-    ],
-  },
-];
-
-  const softSkills = [
-    "Communication",
-    "Problem Solving",
-    "Creativity",
-    "Collaboration",
-    "Adaptability",
-    "Fast Learning",
-  ];
-
-  const metrics = [
-    { value: ["3+"], label: "YEARS EXP." },
-    { value: ["3+"], label: "PROJECTS" },
-    { value: ["8+"], label: "TECH STACKS" },
-  ];
-
   return (
     <section
       id="experience"
@@ -93,13 +44,11 @@ const Experience = () => {
             <div className="relative mt-8 group/timeline">
               <div className="max-h-[500px] overflow-y-auto pr-2 scrollbar-hide">
                 <div className="relative pl-8 space-y-10 pb-8">
-                  {/* Timeline Vertical Line */}
                   <div className="absolute left-[11px] top-2 bottom-2 w-[1px] bg-white/10" />
 
-                  {experiences.map((exp, index) => (
+                  {EXPERIENCE.map((exp: ExperienceItem, index: number) => (
                     <Reveal key={index} delay={0.2 + index * 0.1}>
                       <div className="relative group">
-                        {/* Timeline Circle */}
                         <div className="absolute -left-[27px] top-1.5 w-4 h-4 rounded-full border border-hud-cyan bg-black z-10 group-hover:shadow-[0_0_10px_rgba(0,255,255,0.5)] group-hover:scale-110 transition-all duration-300" />
 
                         <div className="space-y-3">
@@ -113,17 +62,19 @@ const Experience = () => {
                             {exp.company}
                           </p>
                           <ul className="space-y-2 pt-2">
-                            {exp.achievements.map((item, iIndex) => (
-                              <li
-                                key={iIndex}
-                                className="flex items-start gap-2"
-                              >
-                                <div className="h-1.5 w-1.5 rounded-full bg-hud-cyan/30 mt-1.5 shrink-0" />
-                                <span className="text-white/40 font-mono text-xs leading-relaxed">
-                                  {item}
-                                </span>
-                              </li>
-                            ))}
+                            {exp.achievements.map(
+                              (item: string, iIndex: number) => (
+                                <li
+                                  key={iIndex}
+                                  className="flex items-start gap-2"
+                                >
+                                  <div className="h-1.5 w-1.5 rounded-full bg-hud-cyan/30 mt-1.5 shrink-0" />
+                                  <span className="text-white/40 font-mono text-xs leading-relaxed">
+                                    {item}
+                                  </span>
+                                </li>
+                              ),
+                            )}
                           </ul>
                         </div>
                       </div>
@@ -157,7 +108,7 @@ const Experience = () => {
 
             <div className="flex-1 flex flex-col justify-center">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:mt-0">
-                {softSkills.map((skill, index) => (
+                {SOFT_SKILLS.map((skill: string, index: number) => (
                   <Reveal key={index} delay={0.3 + index * 0.05} y={10}>
                     <div
                       key={index}
@@ -183,7 +134,7 @@ const Experience = () => {
               </Reveal>
 
               <div className="grid grid-cols-3 gap-4 mt-12">
-                {metrics.map((metric, index) => (
+                {METRICS.map((metric: Metric, index: number) => (
                   <Reveal key={index} delay={0.6 + index * 0.1}>
                     <div
                       key={index}
@@ -195,7 +146,7 @@ const Experience = () => {
 
                       <div className="relative z-10 flex flex-col items-center text-center gap-1">
                         <div className="flex flex-col items-center">
-                          {metric.value.map((line, lIndex) => (
+                          {metric.value.map((line: string, lIndex: number) => (
                             <span
                               key={lIndex}
                               className="text-xl md:text-2xl font-black text-hud-cyan leading-tight"

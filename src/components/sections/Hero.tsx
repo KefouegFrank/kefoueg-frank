@@ -3,14 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import NextImage from "next/image";
-import NeuralCore from "./canvas/NeuralCore";
-
-const stacks = [
- "Full-Stack Software Engineer",
-"Backend Architect",
-"AI Integration Engineer",
-"Production Systems Builder",
-];
+import NeuralCore from "../canvas/NeuralCore";
+import { HERO_ROLES, CONTACT_INFO } from "../../constants";
+import { IconGithub, IconLinkedIn, IconTwitter } from "../ui/Icons";
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState("");
@@ -20,8 +15,8 @@ const Hero = () => {
 
   useEffect(() => {
     const handleType = () => {
-      const current = loopIndex % stacks.length;
-      const fullText = stacks[current];
+      const current = loopIndex % HERO_ROLES.length;
+      const fullText = HERO_ROLES[current];
 
       setDisplayText(
         isDeleting
@@ -42,6 +37,24 @@ const Hero = () => {
     const timer = setTimeout(handleType, typingSpeed);
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, loopIndex, typingSpeed]);
+
+  const socialLinks = [
+    {
+      name: "GitHub",
+      href: CONTACT_INFO.github,
+      icon: IconGithub,
+    },
+    {
+      name: "LinkedIn",
+      href: CONTACT_INFO.linkedin,
+      icon: IconLinkedIn,
+    },
+    {
+      name: "Twitter",
+      href: CONTACT_INFO.twitter,
+      icon: IconTwitter,
+    },
+  ];
 
   return (
     <section
@@ -89,10 +102,10 @@ const Hero = () => {
 
           {/* Description */}
           <p className="max-w-xl text-sm md:text-base text-white/50 font-mono leading-relaxed">
-            Full-Stack Engineer building production-ready systems across 
-frontend, backend, and AI integration. I ship real products — 
-from architecture and database design to deployment and DNS. 
-Based in Cameroon, working globally
+            Full-Stack Engineer building production-ready systems across
+            frontend, backend, and AI integration. I ship real products — from
+            architecture and database design to deployment and DNS. Based in
+            Cameroon, working globally
           </p>
 
           {/* Action Buttons */}
@@ -130,23 +143,7 @@ Based in Cameroon, working globally
 
           {/* Social Links */}
           <div className="flex gap-5 mt-1">
-            {[
-              {
-                name: "GitHub",
-                href: "https://github.com/KefouegFrank",
-                path: "M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.63-.33 2.47-.33.84 0 1.68.11 2.47.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z",
-              },
-              {
-                name: "LinkedIn",
-                href: "https://www.linkedin.com/in/kefoueg-frank-61b64424a",
-                path: "M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a2.7 2.7 0 0 0-2.7-2.7c-.7 0-1.3.3-1.8.8v-.6h-2.4V18h2.4v-4.5c0-.6.4-1 1-1 .6 0 1 .4 1 1v4.5h2.5M7.5 10a1.5 1.5 0 0 0 1.5-1.5A1.5 1.5 0 0 0 7.5 7 1.5 1.5 0 0 0 6 8.5 1.5 1.5 0 0 0 7.5 10M9 18V10.5H6V18h3z",
-              },
-              {
-                name: "Twitter",
-                href: "#",
-                path: "M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.55-1.37 1.87-2.36-.83.49-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98-3.56-.18-6.73-1.89-8.84-4.48-.37.63-.58 1.37-.58 2.15 0 1.48.75 2.78 1.89 3.55-.7 0-1.36-.2-1.94-.53v.05c0 2.05 1.46 3.76 3.4 4.15-.36.1-.74.15-1.12.15-.27 0-.54-.03-.8-.08.54 1.68 2.1 2.9 3.95 2.93-1.44 1.13-3.27 1.81-5.25 1.81-.34 0-.67-.02-1-.06 1.87 1.2 4.1 1.9 6.47 1.9 7.75 0 11.99-6.43 11.99-11.99 0-.18 0-.37-.01-.55.82-.59 1.53-1.32 2.09-2.15z",
-              },
-            ].map((social) => (
+            {socialLinks.map((social) => (
               <a
                 key={social.name}
                 href={social.href}
@@ -176,12 +173,7 @@ Based in Cameroon, working globally
                     }}
                   />
 
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="w-5 h-5 fill-current transition-transform group-hover:scale-110 relative z-10"
-                  >
-                    <path d={social.path} />
-                  </svg>
+                  <social.icon className="w-5 h-5 fill-current transition-transform group-hover:scale-110 relative z-10" />
                 </div>
               </a>
             ))}

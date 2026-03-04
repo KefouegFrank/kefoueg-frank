@@ -1,14 +1,14 @@
 "use client";
 
-import Hero from "@/components/Hero";
+import Hero from "@/components/sections/Hero";
 import ParticleBackground from "@/components/canvas/ParticleBackground";
-import About from "@/components/About";
-import Experience from "@/components/Experience";
-import TechStack from "@/components/TechStack";
-import Projects from "@/components/Projects";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import GlowingCursor from "@/components/GlowingCursor";
+import About from "@/components/sections/About";
+import Experience from "@/components/sections/Experience";
+import TechStack from "@/components/sections/TechStack";
+import Projects from "@/components/sections/Projects";
+import Contact from "@/components/sections/Contact";
+import Footer from "@/components/layout/Footer";
+import GlowingCursor from "@/components/ui/GlowingCursor";
 
 export default function Home() {
   return (

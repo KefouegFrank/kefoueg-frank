@@ -1,32 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Reveal } from "./Reveal";
+import { Reveal } from "../ui/Reveal";
+import { EDUCATION } from "../../constants";
 
 const About = () => {
-  const education = [
-    {
-      year: "2023 - 2024",
-      degree: "B. Tech in Software Engineering",
-      institution: "Institut Universitaire des Grandes Écoles des Tropiques",
-      modules: [
-        "Advanced Web Engineering",
-        "System Architecture",
-        "Database Design",
-      ],
-    },
-    {
-      year: "2020 - 2022",
-      degree: "HND in Software Engineering",
-      institution: "Institut Universitaire des Grandes Écoles des Tropiques",
-      modules: [
-        "Programming Fundamentals",
-        "Backend Patterns",
-        "Frontend Development",
-      ],
-    },
-  ];
-
   return (
     <section
       id="about"
@@ -34,7 +12,7 @@ const About = () => {
     >
       {/* HUD Background - Identity Scan */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Circuit Topology Overlay */}
+        {/* ... Circuit Topology Overlay ... */}
         <svg
           className="absolute inset-0 w-full h-full opacity-[0.15]"
           xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +23,6 @@ const About = () => {
             height="200"
             patternUnits="userSpaceOnUse"
           >
-            {/* Static Background Paths */}
             <path
               d="M 0 100 L 50 100 L 70 80 L 130 80 L 150 100 L 200 100"
               fill="none"
@@ -60,8 +37,6 @@ const About = () => {
               strokeWidth="1"
               opacity="0.3"
             />
-
-            {/* Animated Current Pulses (Horizontal) */}
             <motion.path
               d="M 0 100 L 50 100 L 70 80 L 130 80 L 150 100 L 200 100"
               fill="none"
@@ -69,14 +44,8 @@ const About = () => {
               strokeWidth="1.5"
               strokeDasharray="40 160"
               animate={{ strokeDashoffset: [200, 0] }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear",
-              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
             />
-
-            {/* Animated Current Pulses (Vertical) */}
             <motion.path
               d="M 100 0 L 100 50 L 80 70 L 80 130 L 100 150 L 100 200"
               fill="none"
@@ -84,13 +53,8 @@ const About = () => {
               strokeWidth="1.5"
               strokeDasharray="40 160"
               animate={{ strokeDashoffset: [0, 200] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "linear",
-              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             />
-
             <circle cx="70" cy="80" r="3" fill="var(--hud-cyan)" />
             <circle cx="130" cy="80" r="3" fill="var(--hud-cyan)" />
             <circle cx="80" cy="70" r="3" fill="var(--hud-cyan)" />
@@ -99,25 +63,15 @@ const About = () => {
           <rect width="100%" height="100%" fill="url(#circuit)" />
         </svg>
 
-        {/* Radar Pulse Animation */}
         <motion.div
           initial={{ scale: 0.5, opacity: 0 }}
-          animate={{
-            scale: [0.5, 1.2, 2],
-            opacity: [0, 0.7, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeOut",
-          }}
+          animate={{ scale: [0.5, 1.2, 2], opacity: [0, 0.7, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeOut" }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border-2 border-hud-cyan/30 rounded-full shadow-[0_0_30px_rgba(0,255,255,0.2)]"
         />
 
-        {/* Ambient Glow */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,255,0.05)_0%,transparent_70%)]" />
 
-        {/* Technical Corner Brackets */}
         <div className="absolute top-4 left-2 lg:left-6 w-24 h-24 border-t border-l border-hud-cyan/20">
           <span className="absolute top-2 left-2 font-mono text-[8px] text-hud-cyan/40 tracking-wider">
             [ID_FRANK]
@@ -205,13 +159,11 @@ const About = () => {
 
           <div className="flex-1 flex flex-col justify-center -mt-4 md:mt-12">
             <div className="relative pl-8 space-y-12">
-              {/* Timeline Vertical Line */}
               <div className="absolute left-[11px] top-2 bottom-2 w-[1px] bg-white/10" />
 
-              {education.map((item, index) => (
+              {EDUCATION.map((item, index) => (
                 <Reveal key={index} delay={0.3 + index * 0.1}>
                   <div className="relative group">
-                    {/* Timeline Circle */}
                     <div className="absolute -left-[27px] top-1.5 w-4 h-4 rounded-full border border-hud-cyan bg-black z-10 group-hover:shadow-[0_0_10px_rgba(0,255,255,0.5)] group-hover:scale-110 transition-all duration-300" />
 
                     <div className="space-y-2">
@@ -243,7 +195,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* Decorative Background Element */}
       <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-hud-cyan/5 blur-[120px] rounded-full pointer-events-none" />
     </section>
   );
