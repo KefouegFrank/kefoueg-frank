@@ -15,18 +15,6 @@ The site showcases:
 - `src/constants` — static content and project data
 - `src/types` — TypeScript interfaces and data models
 
-## Available scripts
-
-```bash
-pnpm dev
-pnpm build
-pnpm start
-pnpm lint
-pnpm typecheck
-pnpm check
-pnpm clean
-```
-
 ## Local development
 
 1. Install dependencies:
