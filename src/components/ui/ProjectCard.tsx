@@ -51,26 +51,26 @@ const ProjectCard = ({
 
   return (
     <motion.div
-      layout
       className="project-card"
       onMouseEnter={onEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{
         opacity: isAnyHovered && !isHovered ? 0.25 : 1,
-        scale: isAnyHovered && !isHovered ? 0.96 : 1,
+        scale: isHovered ? 1.02 : isAnyHovered ? 0.96 : 1,
         filter:
           isAnyHovered && !isHovered
             ? "grayscale(1) blur(2px)"
             : "grayscale(0) blur(0px)",
       }}
       transition={{
-        duration: 0.5,
+        duration: 0.4,
         ease: [0.4, 0, 0.2, 1],
       }}
       style={{
-        flex: isHovered ? "2.5 1 0%" : "1 1 0%",
-        transition: "flex 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+        flex: "0 0 auto",
+        width: isHovered ? "calc(100% / 3 * 1.85 - 0.35rem)" : "calc(100% / 3 - 0.35rem)",
+        minWidth: 300,
         cursor: "pointer",
         rotateX,
         rotateY,
@@ -81,6 +81,8 @@ const ProjectCard = ({
         boxShadow: isHovered
           ? "0 0 48px color-mix(in srgb, var(--hud-cyan) 10%, transparent), 0 12px 40px rgba(0,0,0,0.7)"
           : "0 4px 20px rgba(0,0,0,0.5)",
+        position: "relative",
+        transition: "width 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
       }}
     >
       {/* ── Full-bleed background image ── */}

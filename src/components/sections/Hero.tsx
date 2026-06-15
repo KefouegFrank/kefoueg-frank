@@ -67,9 +67,9 @@ const Hero = () => {
           {/* Status Badges */}
           <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-left">
             {/* Available Badge */}
-            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 border border-white/10 backdrop-blur-sm">
               <span className="text-sm">🚀</span>
-              <span className="text-[10px] uppercase tracking-widest text-white/80 font-mono">
+              <span className="text-[10px] uppercase tracking-widest text-white/90 font-mono font-bold">
                 Available for work
               </span>
             </div>
@@ -77,7 +77,7 @@ const Hero = () => {
             {/* Role Tag - Terminal Typewriter */}
             <div className="flex items-center gap-2 font-mono">
               <span className="text-hud-cyan/80">&gt;_</span>
-              <span className="text-[12px] uppercase tracking-widest text-hud-cyan min-h-[1.5em] flex items-center">
+              <span className="text-[12px] uppercase tracking-widest text-hud-cyan min-h-[1.5em] flex items-center font-bold italic">
                 {displayText}
                 <span className="inline-block w-2 h-4 bg-hud-cyan ml-1 animate-pulse" />
               </span>

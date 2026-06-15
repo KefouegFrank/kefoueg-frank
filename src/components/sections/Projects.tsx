@@ -11,6 +11,11 @@ const Projects = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  // Drag state
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+
   // Number of cards to show at once (responsive)
   const [visibleCards, setVisibleCards] = useState(3);
 
@@ -33,38 +38,72 @@ const Projects = () => {
   const maxStartIndex = Math.max(0, PROJECTS.length - visibleCards);
   const effectiveStartIndex = Math.min(startIndex, maxStartIndex);
 
-  // Auto-slide logic
+  // Auto-slide logic with smooth looping
   useEffect(() => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
       setStartIndex((prev) => {
-        const safePrev = Math.min(prev, maxStartIndex);
-        const next = safePrev + 1;
+        const next = prev + 1;
         return next > maxStartIndex ? 0 : next;
       });
     }, 4000); // Slide every 4 seconds
 
     return () => clearInterval(interval);
-  }, [isPaused, visibleCards, maxStartIndex]);
+  }, [isPaused, maxStartIndex]);
 
   const handleNext = () => {
     setStartIndex((prev) => {
-      const safePrev = Math.min(prev, maxStartIndex);
-      const next = safePrev + 1;
+      const next = prev + 1;
       return next > maxStartIndex ? maxStartIndex : next;
     });
   };
 
   const handlePrev = () => {
-    setStartIndex((prev) => {
-      const safePrev = Math.min(prev, maxStartIndex);
-      return Math.max(safePrev - 1, 0);
-    });
+    setStartIndex((prev) => Math.max(prev - 1, 0));
   };
 
-  // Get the currently visible slice of projects
-  const visibleProjects = PROJECTS.slice(effectiveStartIndex, effectiveStartIndex + visibleCards);
+  // Drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragStart(e.clientX);
+    setIsPaused(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+
+    const diff = e.clientX - dragStart;
+    setDragOffset(diff);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+
+    setIsDragging(false);
+
+    // Calculate card width
+    const cardWidth = window.innerWidth / visibleCards;
+    const threshold = cardWidth * 0.2; // 20% threshold to snap
+
+    // Determine which direction and how many cards to move
+    const cardsToMove = Math.round(Math.abs(dragOffset) / (cardWidth + 14)); // +14 for gap
+
+    if (dragOffset > threshold) {
+      // Dragged right - move backward
+      setStartIndex((prev) => Math.max(prev - cardsToMove, 0));
+    } else if (dragOffset < -threshold) {
+      // Dragged left - move forward
+      setStartIndex((prev) => {
+        const max = Math.max(0, PROJECTS.length - visibleCards);
+        const next = prev + cardsToMove;
+        return next > max ? max : next;
+      });
+    }
+
+    setDragOffset(0);
+    setIsPaused(false);
+  };
 
   return (
     <section
@@ -106,38 +145,58 @@ const Projects = () => {
           </div>
         </Reveal>
 
-        {/* ── Horizontal accordion ── */}
+        {/* ── Horizontal Carousel Track ── */}
         <Reveal delay={0.3} y={40}>
           <div
             style={{
-              display: "flex",
-              gap: 14,
-              height: 520,
               width: "100%",
+              height: 520,
+              overflow: "hidden",
+              position: "relative",
+              cursor: isDragging ? "grabbing" : "grab",
             }}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseEnter={() => !isDragging && setIsPaused(true)}
+            onMouseLeave={() => {
+              if (isDragging) {
+                handleMouseUp();
+              } else {
+                setIsPaused(false);
+              }
+            }}
           >
-            {visibleProjects.map((project, relativeIndex) => {
-              const absoluteIndex = startIndex + relativeIndex;
-              return (
+            {/* Animated track container */}
+            <div
+              style={{
+                display: "flex",
+                gap: 14,
+                height: 520,
+                transform: `translateX(calc(-${effectiveStartIndex} * (calc((100% / ${visibleCards}) - 0.35rem)) + ${dragOffset}px))`,
+                transition: isDragging ? "none" : "transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
+                width: "100%",
+                userSelect: "none",
+              }}
+            >
+              {PROJECTS.map((project, absoluteIndex) => (
                 <ProjectCard
                   key={project.id}
                   project={project}
                   index={absoluteIndex}
-                  isHovered={hoveredIndex === absoluteIndex}
-                  isAnyHovered={hoveredIndex !== null}
-                  onEnter={() => setHoveredIndex(absoluteIndex)}
+                  isHovered={hoveredIndex === absoluteIndex && !isDragging}
+                  isAnyHovered={hoveredIndex !== null && !isDragging}
+                  onEnter={() => !isDragging && setHoveredIndex(absoluteIndex)}
                   onLeave={() => setHoveredIndex(null)}
                 />
-              );
-            })}
+              ))}
+            </div>
           </div>
         </Reveal>
 
         {/* ── Bottom Controls ── */}
         <div className="flex flex-row items-center justify-between gap-6 mt-12 w-full">
-          <p className="font-mono text-[10px] text-white/40 uppercase tracking-widest">
+          <p className="font-mono text-[12px] text-white/60 uppercase tracking-widest italic">
             — Hover a project to expand / pause
           </p>
 

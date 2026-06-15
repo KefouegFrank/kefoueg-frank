@@ -50,6 +50,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="icon" href="/side-identity.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/side-identity.svg" />
+        <meta name="theme-color" content="#010308" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#010308] text-white`}
       >
