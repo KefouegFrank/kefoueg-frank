@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Project } from "../../types";
 import StatusBadge from "./StatusBadge";
@@ -83,15 +84,14 @@ const ProjectCard = ({
       }}
     >
       {/* ── Full-bleed background image ── */}
-      <img
+      <Image
         src={project.image}
         alt={project.title}
-        className="card-image w-full h-full object-cover"
+        fill
+        className="card-image object-cover"
         style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 0,
           objectPosition: "10% center",
+          zIndex: 0,
           transform: `translateZ(0px) ${isHovered ? "scale(1.06)" : "scale(1)"}`,
           transition: "transform 0.65s cubic-bezier(0.4,0,0.2,1)",
         }}

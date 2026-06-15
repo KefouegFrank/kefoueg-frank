@@ -1,5 +1,3 @@
-"use client";
-
 import Hero from "@/components/sections/Hero";
 import ParticleBackground from "@/components/canvas/ParticleBackground";
 import About from "@/components/sections/About";

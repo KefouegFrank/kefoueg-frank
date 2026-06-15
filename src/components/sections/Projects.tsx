@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Reveal } from "../ui/Reveal";
 import { PROJECTS } from "../../constants";
 import { IconChevronLeft, IconChevronRight } from "../ui/Icons";
@@ -31,36 +30,41 @@ const Projects = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Update startIndex to stay within bounds when visibleCards changes
-  useEffect(() => {
-    setStartIndex((prev) =>
-      Math.min(prev, Math.max(0, PROJECTS.length - visibleCards)),
-    );
-  }, [visibleCards]);
+  const maxStartIndex = Math.max(0, PROJECTS.length - visibleCards);
+  const effectiveStartIndex = Math.min(startIndex, maxStartIndex);
 
   // Auto-slide logic
   useEffect(() => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
-      setStartIndex(
-        (prev) => (prev + 1) % Math.max(1, PROJECTS.length - visibleCards + 1),
-      );
+      setStartIndex((prev) => {
+        const safePrev = Math.min(prev, maxStartIndex);
+        const next = safePrev + 1;
+        return next > maxStartIndex ? 0 : next;
+      });
     }, 4000); // Slide every 4 seconds
 
     return () => clearInterval(interval);
-  }, [isPaused, visibleCards]);
+  }, [isPaused, visibleCards, maxStartIndex]);
 
   const handleNext = () => {
-    setStartIndex((prev) => Math.min(prev + 1, PROJECTS.length - visibleCards));
+    setStartIndex((prev) => {
+      const safePrev = Math.min(prev, maxStartIndex);
+      const next = safePrev + 1;
+      return next > maxStartIndex ? maxStartIndex : next;
+    });
   };
 
   const handlePrev = () => {
-    setStartIndex((prev) => Math.max(prev - 1, 0));
+    setStartIndex((prev) => {
+      const safePrev = Math.min(prev, maxStartIndex);
+      return Math.max(safePrev - 1, 0);
+    });
   };
 
   // Get the currently visible slice of projects
-  const visibleProjects = PROJECTS.slice(startIndex, startIndex + visibleCards);
+  const visibleProjects = PROJECTS.slice(effectiveStartIndex, effectiveStartIndex + visibleCards);
 
   return (
     <section
@@ -140,9 +144,9 @@ const Projects = () => {
           <div className="flex items-center gap-4">
             <button
               onClick={handlePrev}
-              disabled={startIndex === 0}
+              disabled={effectiveStartIndex === 0}
               className={`p-3 rounded-full border border-white/10 flex items-center justify-center transition-all ${
-                startIndex === 0
+                effectiveStartIndex === 0
                   ? "opacity-30 cursor-not-allowed"
                   : "hover:border-hud-cyan hover:text-hud-cyan cursor-pointer bg-white/5"
               }`}
@@ -152,9 +156,9 @@ const Projects = () => {
             </button>
             <button
               onClick={handleNext}
-              disabled={startIndex >= PROJECTS.length - visibleCards}
+              disabled={effectiveStartIndex >= maxStartIndex}
               className={`p-3 rounded-full border border-white/10 flex items-center justify-center transition-all ${
-                startIndex >= PROJECTS.length - visibleCards
+                effectiveStartIndex >= maxStartIndex
                   ? "opacity-30 cursor-not-allowed"
                   : "hover:border-hud-cyan hover:text-hud-cyan cursor-pointer bg-white/5"
               }`}

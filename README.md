@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kefoueg Frank Portfolio
 
-## Getting Started
+A personal portfolio website built with Next.js 16, React 19, TypeScript, Tailwind CSS v4, Framer Motion, and Three.js.
 
-First, run the development server:
+The site showcases:
+- portfolio projects and technical experience
+- animated HUD-style visuals and 3D particle background
+- a contact form integrated with Resend
+- responsive navbar and mobile navigation
+
+## Project structure
+
+- `src/app` — Next.js app router entrypoints
+- `src/components` — UI, layout, canvas, and section components
+- `src/constants` — static content and project data
+- `src/types` — TypeScript interfaces and data models
+
+## Available scripts
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
+pnpm build
+pnpm start
+pnpm lint
+pnpm typecheck
+pnpm check
+pnpm clean
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Install dependencies:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm install
+```
 
-## Learn More
+2. Create a local environment file:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cp .env.example .env.local
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Add your Resend API key to `.env.local`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+RESEND_API_KEY=your_actual_api_key_here
+```
 
-## Deploy on Vercel
+4. Start the development server:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Open http://localhost:3000
+
+## Environment variables
+
+The project currently requires:
+
+- `RESEND_API_KEY` — used by `src/app/api/contact/route.ts` to send portfolio contact emails.
+
+## Deployment
+
+This project is ready to deploy to Vercel, but it can also run on any Node-compatible provider supporting Next.js.
+
+## Future improvements
+
+- implement actual localization for the language selector
+- add tests for the contact API and page rendering
+- optimize Three.js particle rendering for mobile
+- add a production `robots.txt` and sitemap if deployed publicly

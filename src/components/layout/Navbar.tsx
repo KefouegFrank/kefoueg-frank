@@ -13,7 +13,19 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+        setIsLangOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   const navLinks = [
@@ -57,12 +69,14 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* ... (rest of the nav content) ... */}
-          <div
-            onClick={() =>
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
               document
                 .getElementById("home")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+                ?.scrollIntoView({ behavior: "smooth" });
+            }}
             className="flex items-center gap-3 group cursor-pointer"
           >
             <div className="relative w-10 h-10 flex items-center justify-center">
@@ -85,7 +99,7 @@ const Navbar = () => {
             >
               Frank<span className="text-hud-cyan">.</span>K
             </span>
-          </div>
+          </a>
 
           {/* Navigation Actions */}
           <div className="flex items-center gap-4 md:gap-8">
@@ -122,7 +136,11 @@ const Navbar = () => {
               {/* Language Switcher - Visible on all, before hamburger on mobile */}
               <div className="relative">
                 <button
+                  type="button"
                   onClick={() => setIsLangOpen(!isLangOpen)}
+                  aria-haspopup="menu"
+                  aria-expanded={isLangOpen}
+                  aria-controls="language-options"
                   className="group flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors font-mono"
                 >
                   <div className="relative w-4 h-4">
@@ -151,6 +169,9 @@ const Navbar = () => {
 
                 {/* Language Dropdown Menu */}
                 <div
+                  role="menu"
+                  id="language-options"
+                  aria-hidden={!isLangOpen}
                   className={`absolute top-full right-0 mt-4 w-40 py-2 bg-black/90 backdrop-blur-xl border border-hud-cyan/20 shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-all duration-300 origin-top-right ${
                     isLangOpen
                       ? "opacity-100 scale-100 translate-y-0"
@@ -160,6 +181,8 @@ const Navbar = () => {
                   <div className="absolute top-0 left-0 w-full h-1 bg-hud-cyan/10" />
                   {languages.map((lang) => (
                     <button
+                      type="button"
+                      role="menuitem"
                       key={lang.code}
                       onClick={() => {
                         setCurrentLang(lang.code);
@@ -208,6 +231,10 @@ const Navbar = () => {
 
             {/* Mobile Menu Toggle */}
             <button
+              type="button"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
               className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50 transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
@@ -227,12 +254,19 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay - Outside nav to prevent scroll box clipping */}
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-menu-heading"
+        id="mobile-menu"
         className={`fixed inset-0 bg-black z-[999] flex flex-col items-center justify-center transition-all duration-500 overflow-y-auto ${
           isMobileMenuOpen
             ? "opacity-100 translate-x-0"
             : "opacity-0 translate-x-full pointer-events-none"
         }`}
       >
+        <span id="mobile-menu-heading" className="sr-only">
+          Main navigation menu
+        </span>
         {/* HUD Grid Background for Menu */}
         <div
           className="absolute inset-0 opacity-20 pointer-events-none"
@@ -277,6 +311,8 @@ const Navbar = () => {
 
         {/* Close Button specifically for overlay */}
         <button
+          type="button"
+          aria-label="Close navigation menu"
           className="absolute top-8 right-8 w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50"
           onClick={() => setIsMobileMenuOpen(false)}
         >

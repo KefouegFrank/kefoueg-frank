@@ -12,31 +12,57 @@ export default function Loader({ onComplete }: LoaderProps) {
 
   useEffect(() => {
     let current = 0;
-    const animate = () => {
-      // PRODUCTION LOADING LOGIC: Variable speed for realistic feel (~4.5s total)
-      let increment = 0.4; // Default fast start
+    let rafId: number;
+    let hasLoaded = document.readyState === "complete";
+    let finished = false;
 
-      if (current > 60) increment = 0.2; // Slow down mid-way
-      if (current > 85) increment = 0.1; // Slower towards end
-      if (current > 92 && current < 98) increment = 0.02; // Simulate heavy asset stall
-      if (current >= 98) increment = 0.15; // Final push
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      setProgress(100);
+      setIsExiting(true);
+      setTimeout(() => {
+        onComplete();
+      }, 400);
+    };
+
+    const handleLoad = () => {
+      hasLoaded = true;
+    };
+
+    const animate = () => {
+      if (finished) return;
+
+      let increment = 0.4;
+      if (current > 60) increment = 0.2;
+      if (current > 85) increment = 0.1;
+      if (current > 92 && current < 98) increment = 0.02;
+      if (current >= 98) increment = 0.15;
 
       current += increment;
+      if (current > 100) current = 100;
+      setProgress(Math.floor(current));
 
-      if (current <= 100) {
-        setProgress(Math.floor(current));
-        requestAnimationFrame(animate);
-      } else {
-        setProgress(100);
-        setTimeout(() => {
-          setIsExiting(true);
-          setTimeout(() => {
-            onComplete();
-          }, 800);
-        }, 1200); // Slightly more time to see "LAUNCHING"
+      if (hasLoaded && current > 25) {
+        finish();
+        return;
       }
+
+      if (current >= 100) {
+        finish();
+        return;
+      }
+
+      rafId = requestAnimationFrame(animate);
     };
-    requestAnimationFrame(animate);
+
+    window.addEventListener("load", handleLoad);
+    rafId = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      cancelAnimationFrame(rafId);
+    };
   }, [onComplete]);
 
   const getStatus = (p: number) => {
